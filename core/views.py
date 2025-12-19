@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 from .models import Event, PressRelease, Video
+from .forms import ContactForm
 
 def home(request):
     events = Event.objects.all()[:3]
@@ -42,8 +44,18 @@ def video_detail(request, pk):
     video = get_object_or_404(Video, pk=pk)
     return render(request, 'video_detail.html', {'video': video})
 
-def donation(request):
-    return render(request, 'donation.html')
 
 def contact(request):
-    return render(request, 'contact.html')
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'আপনার বার্তা সফলভাবে প্রেরণ করা হয়েছে। আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।')
+            return redirect('contact')
+        else:
+            messages.error(request, 'ফর্মটি পূরণ করতে সমস্যা হয়েছে। অনুগ্রহ করে সকল ক্ষেত্র সঠিকভাবে পূরণ করুন।')
+    else:
+        form = ContactForm()
+    
+    return render(request, 'contact.html', {'form': form})
+

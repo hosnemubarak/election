@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -12,6 +12,6 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('manifesto/', views.manifesto, name='manifesto'),
     path('media/', views.media, name='media'),
-    path('donation/', views.donation, name='donation'),
     path('contact/', views.contact, name='contact'),
+    path('captcha/', include('captcha.urls')),
 ]

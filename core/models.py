@@ -39,3 +39,27 @@ class Video(models.Model):
         match = re.search(r'(?:v=|/)([0-9A-Za-z_-]{11}).*', self.youtube_url)
         return match.group(1) if match else ''
 
+class ContactMessage(models.Model):
+    DEPARTMENT_CHOICES = [
+        ('general', 'সাধারণ জিজ্ঞাসা'),
+        ('media', 'মিডিয়া ও প্রেস'),
+        ('volunteer', 'স্বেচ্ছাসেবক'),
+        ('other', 'অন্যান্য'),
+    ]
+    
+    name = models.CharField(max_length=200, verbose_name='নাম')
+    email = models.EmailField(verbose_name='ইমেইল')
+    phone = models.CharField(max_length=20, verbose_name='ফোন নম্বর')
+    department = models.CharField(max_length=50, choices=DEPARTMENT_CHOICES, verbose_name='বিভাগ')
+    message = models.TextField(verbose_name='বার্তা')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='প্রেরণের সময়')
+    is_read = models.BooleanField(default=False, verbose_name='পড়া হয়েছে')
+    
+    class Meta:
+        verbose_name = 'যোগাযোগ বার্তা'
+        verbose_name_plural = 'যোগাযোগ বার্তাসমূহ'
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.name} - {self.department} ({self.created_at.strftime('%d %b %Y')})"
+

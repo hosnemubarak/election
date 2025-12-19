@@ -101,35 +101,69 @@
                 <h2 class="display-4 mb-3">যে কোনো সময়ে বার্তা পাঠান</h2>
                 <p class="text-muted mb-4">ফর্মটি পূরণ করুন, আমরা যত দ্রুত সম্ভব আপনার সঙ্গে যোগাযোগ করব।</p>
 
+                <!-- Success/Error Messages -->
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+
                 <div class="card border-0 shadow-sm p-4" style="background-color: #fff;">
-                    <form>
+                    <form method="post">
+                        {% csrf_token %}
+
                         <div class="mb-3">
-                            <label for="name" class="form-label">আপনার নাম</label>
-                            <input type="text" class="form-control" id="name" placeholder="আপনার পূর্ণ নাম লিখুন">
+                            {{ form.name.label_tag }}
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                            <div class="text-danger small">{{ form.name.errors }}</div>
+                            {% endif %}
                         </div>
+
                         <div class="mb-3">
-                            <label for="email" class="form-label">ইমেইল</label>
-                            <input type="email" class="form-control" id="email" placeholder="ইমেইল ঠিকানা" required>
+                            {{ form.email.label_tag }}
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                            <div class="text-danger small">{{ form.email.errors }}</div>
+                            {% endif %}
                         </div>
+
                         <div class="mb-3">
-                            <label for="phone" class="form-label">ফোন নম্বর</label>
-                            <input type="tel" class="form-control" id="phone" placeholder="+880 123 45677" required>
+                            {{ form.phone.label_tag }}
+                            {{ form.phone }}
+                            {% if form.phone.errors %}
+                            <div class="text-danger small">{{ form.phone.errors }}</div>
+                            {% endif %}
                         </div>
+
                         <div class="mb-3">
-                            <label for="department" class="form-label">বিভাগ</label>
-                            <select class="form-select" id="department">
-                                <option>সাধারণ জিজ্ঞাসা</option>
-                                <option>মিডিয়া ও প্রেস</option>
-                                <option>স্বেচ্ছাসেবক</option>
-                                <option>অনুদান বিষয়ক</option>
-                                <option>একটি বিভাগ নির্বাচন করুন</option>
-                            </select>
+                            {{ form.department.label_tag }}
+                            {{ form.department }}
+                            {% if form.department.errors %}
+                            <div class="text-danger small">{{ form.department.errors }}</div>
+                            {% endif %}
                         </div>
+
                         <div class="mb-3">
-                            <label for="message" class="form-label">বার্তা</label>
-                            <textarea class="form-control" id="message" rows="4"
-                                placeholder="আপনার বার্তা লিখুন..."></textarea>
+                            {{ form.message.label_tag }}
+                            {{ form.message }}
+                            {% if form.message.errors %}
+                            <div class="text-danger small">{{ form.message.errors }}</div>
+                            {% endif %}
                         </div>
+
+                        <div class="mb-3">
+                            {{ form.captcha.label_tag }}
+                            {{ form.captcha }}
+                            {% if form.captcha.errors %}
+                            <div class="text-danger small">{{ form.captcha.errors }}</div>
+                            {% endif %}
+                            <small class="text-muted">{{ form.captcha.help_text }}</small>
+                        </div>
+
                         <button type="submit" class="btn btn-secondary w-100">
                             <i class="fab fa-telegram-plane me-2"></i> বার্তা পাঠান
                         </button>
@@ -187,18 +221,7 @@
                         </div>
                     </div>
 
-                    <!-- Donation Support -->
-                    <div class="col-12">
-                        <div class="card quick-support-card border-0 shadow-sm p-3">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-phone-alt fa-2x text-secondary me-3"></i>
-                                <div>
-                                    <h6 class="fw-bold mb-1">অনুদান সহায়তা</h6>
-                                    <p class="mb-0 text-muted">+880 123 45677</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -253,8 +276,7 @@
                     <li><a href="{% url 'manifesto' %}" class="text-white-50 mb-2 d-block"
                             style="text-decoration: none;"><i class="fas fa-arrow-right me-2"></i> নির্বাচনী
                             ইশতেহার</a></li>
-                    <li><a href="{% url 'donation' %}" class="text-white-50 mb-2 d-block"
-                            style="text-decoration: none;"><i class="fas fa-arrow-right me-2"></i> অনুদান</a></li>
+
                 </ul>
             </div>
             <div class="col-lg-4">
