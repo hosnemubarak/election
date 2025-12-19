@@ -27,12 +27,41 @@
         }
 
         /* Standardized logo size */
+        /* Standardized logo size */
         .nav-link {
             color: var(--wp--preset--color--black);
+            padding: 0.5rem 1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--wp--preset--color--vivid-green-hard);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
         }
 
         .nav-link:hover {
-            color: var(--wp--preset--color--vivid-red);
+            color: var(--wp--preset--color--vivid-green-hard);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--wp--preset--color--vivid-green-hard);
+            font-weight: 600;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
         }
 
         .btn-primary {
