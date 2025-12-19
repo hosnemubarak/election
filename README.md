@@ -204,7 +204,7 @@ python manage.py migrate
 - [ ] Generate a new `SECRET_KEY`
 - [ ] Configure `ALLOWED_HOSTS` with your domain
 - [ ] Set up PostgreSQL database
-- [ ] Configure static file serving
+- [x] Configure static file serving (Handled by WhiteNoise)
 - [ ] Set up Gunicorn or uWSGI
 - [ ] Configure reverse proxy (Nginx/Apache)
 - [ ] Enable HTTPS/SSL
@@ -236,6 +236,7 @@ See `requirements.txt` for a complete list. Key dependencies:
 - `gunicorn==23.0.0` - WSGI HTTP server
 - `pillow==12.0.0` - Image processing
 - `psycopg2-binary==2.9.11` - PostgreSQL adapter
+- `whitenoise` - Static file serving
 
 ## 🤝 Contributing
 
