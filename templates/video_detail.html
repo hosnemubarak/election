@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">হোম</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'media' %}">মিডিয়া</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'videos' %}">ভিডিও</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ video.title }}</li>
+                    </ol>
+                </nav>
+
+                <div class="card border-0 shadow-lg overflow-hidden">
+                    <div class="card-body p-4 p-md-5">
+                        <h1 class="display-5 fw-bold mb-4">{{ video.title }}</h1>
+                        <div class="d-flex align-items-center text-muted mb-4">
+                            <i class="far fa-calendar-alt text-secondary me-2"></i>
+                            <span>{{ video.created_at|date:"d M Y" }}</span>
+                        </div>
+
+                        <!-- YouTube Embed -->
+                        <div class="ratio ratio-16x9 mb-5">
+                            <iframe src="https://www.youtube.com/embed/{{ video.get_video_id }}"
+                                title="{{ video.title }}" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                            </iframe>
+                        </div>
+
+                        <div class="mt-5 pt-4 border-top">
+                            <h4 class="h5 fw-bold mb-3">শেয়ার করুন:</h4>
+                            <div class="d-flex gap-2">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+                                    target="_blank" class="btn btn-outline-primary btn-sm">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?text={{ video.title }}&url={{ request.build_absolute_uri }}"
+                                    target="_blank" class="btn btn-outline-info btn-sm">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <button onclick="copyToClipboard()" class="btn btn-outline-secondary btn-sm"
+                                    id="copyBtn">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function copyToClipboard() {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+            const btn = document.getElementById('copyBtn');
+            const originalIcon = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            btn.classList.remove('btn-outline-secondary');
+            btn.classList.add('btn-success');
+
+            setTimeout(() => {
+                btn.innerHTML = originalIcon;
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-outline-secondary');
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    }
+</script>
+{% endblock %}

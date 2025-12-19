@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="py-5 bg-white">
+    <div class="container text-center">
+        <div class="mb-4">
+            <span class="badge bg-light text-secondary px-3 py-2 rounded-pill border border-secondary">
+                <i class="far fa-newspaper me-2"></i>Media Center
+            </span>
+        </div>
+        <h1 class="display-4 mb-4 text-secondary">সকল প্রেস রিলিজ</h1>
+        <p class="lead text-muted mx-auto" style="max-width: 800px;">
+            জনগণের সঙ্গে সংযোগের সর্বশেষ ঘোষণা ও আনুষ্ঠানিক বিবৃতি
+        </p>
+    </div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row g-4">
+            {% for press in press_releases %}
+            {% include 'includes/press_card.html' %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

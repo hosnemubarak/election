@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">হোম</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'media' %}">মিডিয়া</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'press_releases' %}">প্রেস রিলিজ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ press.title }}</li>
+                    </ol>
+                </nav>
+
+                <div class="card border-0 shadow-lg overflow-hidden">
+                    {% if press.image %}
+                    <img src="{{ press.image.url }}" class="card-img-top" alt="{{ press.title }}">
+                    {% endif %}
+                    <div class="card-body p-4 p-md-5">
+                        <div class="d-flex align-items-center text-muted mb-3">
+                            <i class="far fa-calendar-alt text-secondary me-2"></i>
+                            <span class="me-3">{{ press.date|date:"d M Y" }}</span>
+                            <span class="badge bg-secondary-soft text-secondary ms-auto">{{ press.category }}</span>
+                        </div>
+                        <h1 class="display-5 fw-bold mb-4">{{ press.title }}</h1>
+                        <div class="lead text-secondary mb-4">
+                            {{ press.summary }}
+                        </div>
+                        <div class="content mb-5">
+                            {{ press.content|linebreaks }}
+                        </div>
+
+                        {% if press.document %}
+                        <div class="mb-5">
+                            <a href="{{ press.document.url }}" class="btn btn-outline-dark" download>
+                                <i class="fas fa-file-download me-2"></i>ডকুমেন্ট ডাউনলোড করুন
+                            </a>
+                        </div>
+                        {% endif %}
+
+                        <div class="mt-5 pt-4 border-top">
+                            <h4 class="h5 fw-bold mb-3">শেয়ার করুন:</h4>
+                            <div class="d-flex gap-2">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+                                    target="_blank" class="btn btn-outline-primary btn-sm">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?text={{ press.title }}&url={{ request.build_absolute_uri }}"
+                                    target="_blank" class="btn btn-outline-info btn-sm">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <button onclick="copyToClipboard()" class="btn btn-outline-secondary btn-sm"
+                                    id="copyBtn">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function copyToClipboard() {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+            const btn = document.getElementById('copyBtn');
+            const originalIcon = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            btn.classList.remove('btn-outline-secondary');
+            btn.classList.add('btn-success');
+
+            setTimeout(() => {
+                btn.innerHTML = originalIcon;
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-outline-secondary');
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    }
+</script>
+{% endblock %}

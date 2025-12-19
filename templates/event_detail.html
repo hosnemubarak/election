@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">হোম</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'events' %}">কার্যক্রম</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ event.title }}</li>
+                    </ol>
+                </nav>
+
+                <div class="card border-0 shadow-lg overflow-hidden">
+                    <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.title }}">
+                    <div class="card-body p-4 p-md-5">
+                        <div class="d-flex align-items-center text-muted mb-3">
+                            <span class="me-3">
+                                <i class="fas fa-calendar-alt me-2"></i>
+                                {{ event.date|date:"d M Y" }}
+                            </span>
+                            <span>
+                                <i class="fas fa-map-marker-alt me-2"></i>
+                                {{ event.location }}
+                            </span>
+                        </div>
+                        <h1 class="display-5 fw-bold mb-4">{{ event.title }}</h1>
+                        <div class="lead text-secondary mb-4">
+                            {{ event.description|linebreaks }}
+                        </div>
+                        <div class="mt-5 pt-4 border-top">
+                            <h4 class="h5 fw-bold mb-3">এই ইভেন্টটি শেয়ার করুন:</h4>
+                            <div class="d-flex gap-2">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+                                    target="_blank" class="btn btn-outline-primary btn-sm">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?text={{ event.title }}&url={{ request.build_absolute_uri }}"
+                                    target="_blank" class="btn btn-outline-info btn-sm">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <button onclick="copyToClipboard()" class="btn btn-outline-secondary btn-sm"
+                                    id="copyBtn">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function copyToClipboard() {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+            const btn = document.getElementById('copyBtn');
+            const originalIcon = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            btn.classList.remove('btn-outline-secondary');
+            btn.classList.add('btn-success');
+
+            setTimeout(() => {
+                btn.innerHTML = originalIcon;
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-outline-secondary');
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    }
+</script>
+{% endblock %}

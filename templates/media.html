@@ -92,63 +92,14 @@
         </div>
 
         <div class="row g-4">
-            <!-- Press Release 1 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 border-0 shadow-sm hover-lift">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="far fa-calendar-alt text-secondary me-2"></i>
-                            <small class="text-muted">৯ নভেম্বর ২০২৫</small>
-                            <span class="badge bg-secondary-soft text-secondary ms-auto">নীতি</span>
-                        </div>
-                        <h4 class="fw-bold mb-3">সমগ্র শিক্ষা সংস্কার পরিকল্পনা ঘোষণা</h4>
-                        <p class="text-muted mb-4">শিক্ষার মানোন্নয়ন, প্রযুক্তিনির্ভর শিক্ষা এবং সকলের জন্য সমান
-                            সুযোগ নিশ্চিত করতে নতুন শিক্ষানীতি উন্মোচন করা হলো।</p>
-                        <a href="#" class="btn btn-outline-secondary btn-sm stretched-link">সম্পূর্ণ বিবৃতি পড়ুন <i
-                                class="fas fa-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Press Release 2 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 border-0 shadow-sm hover-lift">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="far fa-calendar-alt text-secondary me-2"></i>
-                            <small class="text-muted">৫ নভেম্বর ২০২৫</small>
-                            <span class="badge bg-secondary-soft text-secondary ms-auto">প্রচারণা</span>
-                        </div>
-                        <h4 class="fw-bold mb-3">ক্যাম্পেইনে ৫০,০০০ স্বেচ্ছাসেবক মাইলফলক</h4>
-                        <p class="text-muted mb-4">দেশব্যাপী তরুণদের অংশগ্রহণ ও সমর্থনে আমাদের আন্দোলন আরও শক্তিশালী
-                            হচ্ছে।</p>
-                        <a href="#" class="btn btn-outline-secondary btn-sm stretched-link">সম্পূর্ণ বিবৃতি পড়ুন <i
-                                class="fas fa-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Press Release 3 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 border-0 shadow-sm hover-lift">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="far fa-calendar-alt text-secondary me-2"></i>
-                            <small class="text-muted">৫ নভেম্বর ২০২৫</small>
-                            <span class="badge bg-secondary-soft text-secondary ms-auto">নীতি</span>
-                        </div>
-                        <h4 class="fw-bold mb-3">নতুন অবকাঠামো উন্নয়ন পরিকল্পনা</h4>
-                        <p class="text-muted mb-4">সারা দেশে সংযোগ, নিরাপত্তা এবং সেবা সম্প্রসারণে বিস্তৃত উন্নয়ন
-                            প্রকল্পের ঘোষণা।</p>
-                        <a href="#" class="btn btn-outline-secondary btn-sm stretched-link">সম্পূর্ণ বিবৃতি পড়ুন <i
-                                class="fas fa-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
+            {% for press in press_releases %}
+            {% include 'includes/press_card.html' %}
+            {% endfor %}
         </div>
 
         <div class="text-center mt-5">
-            <a href="#" class="btn btn-secondary px-4 py-2 hover-lift">সকল প্রেস রিলিজ দেখুন</a>
+            <a href="{% url 'press_releases' %}" class="btn btn-secondary px-4 py-2 hover-lift">সকল প্রেস রিলিজ
+                দেখুন</a>
         </div>
     </div>
 </section>
@@ -166,49 +117,9 @@
         </div>
 
         <div class="row g-4">
-            <div class="col-md-4">
-                <div class="video-card shadow-sm">
-                    <img src="{% static 'assets/images/HomePag1e.png' %}" alt="Campaign Speech" class="img-fluid w-100">
-                    <div class="video-overlay">
-                        <i class="fas fa-play-circle play-icon"></i>
-                    </div>
-                </div>
-                <div class="p-3">
-                    <h5 class="fw-bold mb-2">ক্যাম্পেইন নির্বাচনী বক্তব্য</h5>
-                    <div class="d-flex align-items-center text-muted small">
-                        <i class="fas fa-eye me-2"></i> 125K দর্শন
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="video-card shadow-sm">
-                    <img src="{% static 'assets/images/HomePage-2.png' %}" alt="Town Hall" class="img-fluid w-100">
-                    <div class="video-overlay">
-                        <i class="fas fa-play-circle play-icon"></i>
-                    </div>
-                </div>
-                <div class="p-3">
-                    <h5 class="fw-bold mb-2">হেলথ কেয়ার টাউন হল</h5>
-                    <div class="d-flex align-items-center text-muted small">
-                        <i class="fas fa-eye me-2"></i> 89K দর্শন
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="video-card shadow-sm">
-                    <img src="{% static 'assets/images/HomePage-1.png' %}" alt="Education Vision"
-                        class="img-fluid w-100">
-                    <div class="video-overlay">
-                        <i class="fas fa-play-circle play-icon"></i>
-                    </div>
-                </div>
-                <div class="p-3">
-                    <h5 class="fw-bold mb-2">সাক্ষাৎকার: শিক্ষার জন্য দৃষ্টিভঙ্গি</h5>
-                    <div class="d-flex align-items-center text-muted small">
-                        <i class="fas fa-eye me-2"></i> 156K দর্শন
-                    </div>
-                </div>
-            </div>
+            {% for video in videos %}
+            {% include 'includes/video_card.html' %}
+            {% endfor %}
         </div>
     </div>
 </section>

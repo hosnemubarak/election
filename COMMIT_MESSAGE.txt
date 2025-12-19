@@ -1,0 +1,33 @@
+feat: Implement dynamic Event, Press Release, and Video pages with share functionality
+
+## Events
+- Created Event list page (`/events/`) and detail page (`/events/<id>/`)
+- Extracted event card into reusable partial (`includes/event_card.html`)
+- Added share buttons (Facebook, Twitter, Copy Link) to event detail page
+- Fixed date/location rendering issues by using multi-line template syntax
+- Populated database with Bengali event data
+
+## Press Releases
+- Created Press Release list page (`/press/`) and detail page (`/press/<id>/`)
+- Extracted press card into reusable partial (`includes/press_card.html`)
+- Updated `/media/` page to display latest 3 press releases dynamically
+- Added share buttons and document download functionality to detail page
+- Implemented consistent design across all press release pages
+
+## Videos
+- Created Video list page (`/videos/`) and detail page (`/videos/<id>/`)
+- Extracted video card into reusable partial (`includes/video_card.html`)
+- Updated `/media/` page to display latest 3 videos dynamically
+- Implemented YouTube embed with proper video ID extraction via model method
+- Added share buttons (Facebook, Twitter, Copy Link) to video detail page
+- Populated database with demo video data
+
+## Technical Changes
+- Added `get_video_id()` method to Video model for YouTube URL parsing
+- Created custom template filter for YouTube ID extraction (alternative approach)
+- Refactored all media cards into reusable partials for design consistency
+- Added URL patterns for all new list and detail views
+- Updated views to fetch and pass dynamic data to templates
+- Implemented clipboard copy functionality with visual feedback
+
+All pages maintain consistent design language and share functionality across Events, Press Releases, and Videos.

@@ -1,0 +1,16 @@
+<div class="col-md-4">
+    <a href="{% url 'video_detail' video.pk %}" class="text-decoration-none">
+        <div class="video-card shadow-sm">
+            <img src="{{ video.thumbnail.url }}" alt="{{ video.title }}" class="img-fluid w-100">
+            <div class="video-overlay">
+                <i class="fas fa-play-circle play-icon"></i>
+            </div>
+        </div>
+        <div class="p-3">
+            <h5 class="fw-bold mb-2 text-dark">{{ video.title }}</h5>
+            <div class="d-flex align-items-center text-muted small">
+                <i class="fas fa-calendar-alt me-2"></i>{{ video.created_at|date:"d M Y" }}
+            </div>
+        </div>
+    </a>
+</div>

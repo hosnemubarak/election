@@ -226,45 +226,9 @@
         </div>
         <h2 class="display-4 mb-5 mt-2 mb-5 mx-auto text-secondary">আমাদের কার্যক্রমে যোগ দিন</h2>
         <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <img src="{% static 'assets/images/HomePag1e.png' %}" class="card-img-top" alt="Event 1">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">টাউন হল মিটিং</h5>
-                        <p class="card-text small text-muted"><i class="fas fa-map-marker-alt me-1"></i> ঢাকা
-                            কমিউনিটি সেন্টার</p>
-                        <p class="card-text">খোলামেলা আলোচনায় যুক্ত হন।</p>
-                        <a href="#" class="btn btn-link text-decoration-none p-0 text-secondary">বিস্তারিত দেখুন <i
-                                class="fas fa-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <img src="{% static 'assets/images/HomePage-2.png' %}" class="card-img-top" alt="Event 2">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">ইউথ সামিট</h5>
-                        <p class="card-text small text-muted"><i class="fas fa-map-marker-alt me-1"></i> ন্যাশনাল
-                            ইউনিভার্সিটি</p>
-                        <p class="card-text">যুব সমাজের নেতৃত্ব বিকাশ।</p>
-                        <a href="#" class="btn btn-link text-decoration-none p-0 text-secondary">বিস্তারিত দেখুন <i
-                                class="fas fa-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <img src="{% static 'assets/images/HomePage-1.png' %}" class="card-img-top" alt="Event 3">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">হেলথকেয়ার ওয়ার্কশপ</h5>
-                        <p class="card-text small text-muted"><i class="fas fa-map-marker-alt me-1"></i> সেন্ট্রাল
-                            হাসপাতাল</p>
-                        <p class="card-text">স্বাস্থ্যখাতের উন্নয়ন বিষয়ে মতবিনিময়।</p>
-                        <a href="#" class="btn btn-link text-decoration-none p-0 text-secondary">বিস্তারিত দেখুন <i
-                                class="fas fa-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
+            {% for event in events %}
+            {% include 'includes/event_card.html' %}
+            {% endfor %}
         </div>
     </div>
 </section>

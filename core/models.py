@@ -30,3 +30,12 @@ class Video(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_video_id(self):
+        """Extract YouTube video ID from URL"""
+        import re
+        if not self.youtube_url:
+            return ''
+        match = re.search(r'(?:v=|/)([0-9A-Za-z_-]{11}).*', self.youtube_url)
+        return match.group(1) if match else ''
+
