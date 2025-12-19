@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}খারাপ অনুরোধ - 400{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="mb-5">
+                    <i class="fas fa-times-circle text-danger" style="font-size: 6rem;"></i>
+                </div>
+                <h1 class="display-1 fw-bold text-danger mb-4">400</h1>
+                <h2 class="h3 mb-4">খারাপ অনুরোধ</h2>
+                <p class="lead text-muted mb-5">
+                    দুঃখিত, আপনার অনুরোধটি বুঝতে পারিনি।<br>
+                    অনুরোধটি ভুল বা অসম্পূর্ণ হতে পারে।
+                </p>
+
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="{% url 'home' %}" class="btn btn-secondary btn-lg px-5">
+                        <i class="fas fa-home me-2"></i>হোমপেজে ফিরে যান
+                    </a>
+                    <button onclick="history.back()" class="btn btn-outline-secondary btn-lg px-5">
+                        <i class="fas fa-arrow-left me-2"></i>পূর্ববর্তী পৃষ্ঠায় ফিরে যান
+                    </button>
+                </div>
+
+                <div class="mt-5 pt-5">
+                    <div class="card border-0 shadow-sm d-inline-block p-4">
+                        <h5 class="fw-bold mb-3">কী করতে পারেন?</h5>
+                        <ul class="list-unstyled text-start mb-0">
+                            <li class="mb-2"><i class="fas fa-arrow-right text-secondary me-2"></i>URL ঠিকানা পরীক্ষা
+                                করুন</li>
+                            <li class="mb-2"><i class="fas fa-arrow-right text-secondary me-2"></i>ফর্ম পুনরায় পূরণ
+                                করুন</li>
+                            <li class="mb-2"><i class="fas fa-arrow-right text-secondary me-2"></i>পৃষ্ঠা রিফ্রেশ করুন
+                            </li>
+                            <li class="mb-2"><i class="fas fa-arrow-right text-secondary me-2"></i>হোমপেজ থেকে শুরু করুন
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

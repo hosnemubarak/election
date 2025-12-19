@@ -15,3 +15,4 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('captcha/', include('captcha.urls')),
 ]
+

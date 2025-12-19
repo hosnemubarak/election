@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}প্রবেশাধিকার নিষিদ্ধ - 403{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="mb-5">
+                    <i class="fas fa-ban text-warning" style="font-size: 6rem;"></i>
+                </div>
+                <h1 class="display-1 fw-bold text-warning mb-4">403</h1>
+                <h2 class="h3 mb-4">প্রবেশাধিকার নিষিদ্ধ</h2>
+                <p class="lead text-muted mb-5">
+                    দুঃখিত, এই পৃষ্ঠাটি দেখার অনুমতি আপনার নেই।<br>
+                    আপনার যদি মনে হয় এটি একটি ভুল, অনুগ্রহ করে আমাদের সাথে যোগাযোগ করুন।
+                </p>
+
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="{% url 'home' %}" class="btn btn-secondary btn-lg px-5">
+                        <i class="fas fa-home me-2"></i>হোমপেজে ফিরে যান
+                    </a>
+                    <a href="{% url 'contact' %}" class="btn btn-outline-secondary btn-lg px-5">
+                        <i class="fas fa-envelope me-2"></i>সহায়তা চান
+                    </a>
+                </div>
+
+                <div class="mt-5 pt-5">
+                    <div class="card border-0 shadow-sm d-inline-block p-4">
+                        <h5 class="fw-bold mb-3">কেন এটি ঘটতে পারে?</h5>
+                        <ul class="list-unstyled text-start mb-0">
+                            <li class="mb-2"><i class="fas fa-check-circle text-secondary me-2"></i>আপনি লগইন করেননি
+                            </li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-secondary me-2"></i>আপনার অ্যাকাউন্টে
+                                প্রয়োজনীয় অনুমতি নেই</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-secondary me-2"></i>পৃষ্ঠাটি শুধুমাত্র
+                                নির্দিষ্ট ব্যবহারকারীদের জন্য</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

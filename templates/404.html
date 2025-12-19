@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}পৃষ্ঠা পাওয়া যায়নি - 404{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="mb-5">
+                    <i class="fas fa-exclamation-triangle text-secondary" style="font-size: 6rem;"></i>
+                </div>
+                <h1 class="display-1 fw-bold text-secondary mb-4">404</h1>
+                <h2 class="h3 mb-4">পৃষ্ঠা পাওয়া যায়নি</h2>
+                <p class="lead text-muted mb-5">
+                    দুঃখিত, আপনি যে পৃষ্ঠাটি খুঁজছেন তা পাওয়া যায়নি। পৃষ্ঠাটি সরানো, মুছে ফেলা বা কখনো বিদ্যমান ছিল
+                    না।
+                </p>
+
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="{% url 'home' %}" class="btn btn-secondary btn-lg px-5">
+                        <i class="fas fa-home me-2"></i>হোমপেজে ফিরে যান
+                    </a>
+                    <a href="{% url 'contact' %}" class="btn btn-outline-secondary btn-lg px-5">
+                        <i class="fas fa-envelope me-2"></i>যোগাযোগ করুন
+                    </a>
+                </div>
+
+                <div class="mt-5 pt-5">
+                    <h5 class="fw-bold mb-3">দরকারী লিংক:</h5>
+                    <div class="d-flex gap-3 justify-content-center flex-wrap">
+                        <a href="{% url 'about' %}" class="text-decoration-none text-secondary">সম্পর্কে</a>
+                        <span class="text-muted">|</span>
+                        <a href="{% url 'manifesto' %}" class="text-decoration-none text-secondary">নির্বাচনী
+                            ইশতেহার</a>
+                        <span class="text-muted">|</span>
+                        <a href="{% url 'media' %}" class="text-decoration-none text-secondary">মিডিয়া</a>
+                        <span class="text-muted">|</span>
+                        <a href="{% url 'events' %}" class="text-decoration-none text-secondary">ইভেন্ট</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
