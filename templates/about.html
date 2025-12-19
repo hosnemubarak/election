@@ -1,0 +1,288 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - Nazmul Mostafa Amin{% endblock %}
+
+{% block extra_css %}
+<style>
+    .timeline-item {
+        border-left: 2px solid #006A4E;
+        padding-left: 1.5rem;
+        margin-bottom: 2rem;
+        position: relative;
+    }
+
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -9px;
+        top: 0;
+        width: 16px;
+        height: 16px;
+        background: #006A4E;
+        border-radius: 50%;
+    }
+
+    .bg-gradient-custom {
+        background: linear-gradient(180deg, #006A4E 0%, #00856B 50%, #00A085 100%);
+        color: white;
+    }
+
+    .footer {
+        background: linear-gradient(180deg, #006A4E 0%, #00856B 50%, #00A085 100%);
+        color: #fff;
+        padding: 3rem 0;
+    }
+
+    .footer a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .text-green-theme {
+        color: #006A4E !important;
+    }
+
+    .border-green-theme {
+        border-color: #006A4E !important;
+    }
+
+    .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hover-lift:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, .075) !important;
+    }
+
+    .bg-green-theme {
+        background-color: #006A4E !important;
+        color: white;
+    }
+
+    .transition-all {
+        transition: all 0.3s ease;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Personal Intro & Stats -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0 order-lg-2">
+                <img src="{% static 'assets/images/Container11.png' %}" class="img-fluid rounded-3"
+                    alt="Ibrahim Chowdhury" style="max-height: 600px; width: auto; display: block; margin: 0 auto;">
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <div class="mb-5">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="badge bg-light text-green-theme px-3 py-2 rounded-pill border border-green-theme">
+                            <i class="far fa-star me-2"></i>নাজমুল মোস্তফা আমিন
+                        </span>
+                    </div>
+                    <h2 class="display-3 mb-4 text-dark">মানুষের পাশে,<br><span class="text-green-theme">অঙ্গীকার
+                            উন্নতির</span></h2>
+                    <p class="lead text-muted opacity-75 mb-4">দীর্ঘদিন ধরে জনসেবা, কমিউনিটি উন্নয়ন এবং মানুষের
+                        অধিকার প্রতিষ্ঠায় নিজেকে নিবেদিত রেখেছি।</p>
+                    <p class="text-muted">সাধারণ মানুষের সমস্যাকে নিজের সমস্যা মনে করে কাজ করা—এই নীতিকেই বুকে ধারণ
+                        করে আমার রাজনৈতিক যাত্রা শুরু। জনগণের কথা বলা, তাদের প্রয়োজনে পাশে থাকা এবং দেশের উন্নয়নে
+                        সৎভাবে দায়িত্ব পালন—এটাই আমার প্রতিশ্রুতি।</p>
+                </div>
+
+                <div class="row g-4 text-center text-lg-start">
+                    <div class="col-4">
+                        <h3 class="fw-bold text-green-theme display-5">২৫+</h3>
+                        <p class="small text-muted fw-bold text-uppercase ls-1">নতুন কর্মসংস্থান</p>
+                    </div>
+                    <div class="col-4">
+                        <h3 class="fw-bold text-green-theme display-5">১০০০০+</h3>
+                        <p class="small text-muted fw-bold text-uppercase ls-1">মানুষ উপকৃত</p>
+                    </div>
+                    <div class="col-4">
+                        <h3 class="fw-bold text-green-theme display-5">২০+</h3>
+                        <p class="small text-muted fw-bold text-uppercase ls-1">উন্নয়নমূলক কর্মসূচি</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Education & Skills -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-8 mx-auto">
+                <div class="d-flex align-items-center justify-content-center mb-4">
+                    <i class="fas fa-graduation-cap fa-2x text-green-theme me-3"></i>
+                    <h3 class="display-4 text-secondary m-0">একাডেমিক শ্রেষ্ঠত্ব</h3>
+                </div>
+                <p class="text-muted mb-4 text-center">শেখার প্রতি নিষ্ঠা এবং ক্রমাগত ব্যক্তিগত উন্নয়নের উপর
+                    নির্মিত একটি
+                    শক্তিশালী শিক্ষাগত ভিত্তি।</p>
+
+                <div class="timeline-item">
+                    <h5 class="fw-bold">২০০০ - ব্যারিস্টার</h5>
+                    <p class="text-muted">লিংকনস ইন, যুক্তরাজ্য। অ্যাডভোকেট, বাংলাদেশ সুপ্রিম কোর্ট।</p>
+                </div>
+                <div class="timeline-item">
+                    <h5 class="fw-bold">১৯৯৪ - আন্তর্জাতিক আইন বিষয়ে মাস্টার্স</h5>
+                    <p class="text-muted">ঢাকা বিশ্ববিদ্যালয়।</p>
+                </div>
+                <div class="timeline-item">
+                    <h5 class="fw-bold">১৯৯২ - ব্যাচেলর অব ল’স (এল.এল.বি)</h5>
+                    <p class="text-muted">ঢাকা বিশ্ববিদ্যালয়।</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Political Journey Timeline -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <i class="fas fa-bullseye fa-2x text-green-theme mb-3"></i>
+            <h2 class="display-4 text-secondary">রাজনৈতিক জীবনী</h2>
+            <p class="text-muted">দুই দশকেরও বেশি সময় ধরে মানুষের কল্যাণে নিবেদিত।</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="timeline-item">
+                    <h5 class="fw-bold text-green-theme">২০০১</h5>
+                    <h6 class="fw-bold">কমিউনিটি অর্গানাইজার</h6>
+                    <p class="text-muted">স্থানীয় উন্নয়ন, যুব সংগঠন এবং কমিউনিটি সেবায় সক্রিয় ভূমিকা পালন।</p>
+                </div>
+                <div class="timeline-item">
+                    <h5 class="fw-bold text-green-theme">২০০২</h5>
+                    <h6 class="fw-bold">সাবেক সাংগঠনিক সম্পাদক, বাংলাদেশ ডেমো ছাত্র দল</h6>
+                    <p class="text-muted">স্থানীয় অবকাঠামো উন্নয়ন, শিক্ষা সহায়তা প্রকল্প ও জনস্বাস্থ্য উদ্যোগ
+                        পরিচালনা।</p>
+                </div>
+                <div class="timeline-item">
+                    <h5 class="fw-bold text-green-theme">২০০৫</h5>
+                    <h6 class="fw-bold">সাবেক সাধারণ সম্পাদক, বাংলাদেশ ডেমো যুব দল</h6>
+                    <p class="text-muted">দেশব্যাপী উন্নয়ন নীতি, প্রকল্প তদারকি এবং মানুষের জীবনমান উন্নয়নে দায়িত্ব
+                        পালন।</p>
+                </div>
+                <div class="timeline-item">
+                    <h5 class="fw-bold text-green-theme">২০১৪</h5>
+                    <h6 class="fw-bold">বর্তমান সাংগঠনিক সম্পাদক, বাংলাদেশ ডেমো পার্টি</h6>
+                    <p class="text-muted">জনগণের স্বার্থ রক্ষা, স্বচ্ছ ও জবাবদিহিমূলক রাজনীতি প্রতিষ্ঠায় কাজ।</p>
+                </div>
+                <div class="timeline-item">
+                    <h5 class="fw-bold text-green-theme">২০২৬</h5>
+                    <h6 class="fw-bold">সংসদ সদস্য পদপ্রার্থী</h6>
+                    <p class="text-muted">একটি উন্নত, সমৃদ্ধ, সুশাসনের বাংলাদেশ গড়ার অঙ্গীকার।</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Social Work / Impact -->
+<section class="py-5" style="background: linear-gradient(180deg, #006A4E 0%, #00856B 50%, #00A085 100%);">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-4 text-white">আমাদের প্রভাব ও কার্যক্রম</h2>
+        </div>
+        <div class="row g-4 text-center">
+            <div class="col-md-3">
+                <div class="p-3 bg-white shadow-sm rounded h-100">
+                    <i class="fas fa-bullseye fa-2x text-green-theme mb-3"></i>
+                    <h5 class="fw-bold">অর্থনৈতিক প্রবৃদ্ধি</h5>
+                    <p class="small text-muted">১৩,০০০+ মানুষ উপকৃত</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 bg-white shadow-sm rounded h-100">
+                    <i class="fas fa-book-open fa-2x text-green-theme mb-3"></i>
+                    <h5 class="fw-bold">শিক্ষা উন্নয়ন</h5>
+                    <p class="small text-muted">৪,০০০+ শিশু উপকৃত</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 bg-white shadow-sm rounded h-100">
+                    <i class="fas fa-users fa-2x text-green-theme mb-3"></i>
+                    <h5 class="fw-bold">নারীর ক্ষমতায়ন</h5>
+                    <p class="small text-muted">১২,০০০+ নারী উপকৃত</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 bg-white shadow-sm rounded h-100">
+                    <i class="fas fa-trophy fa-2x text-green-theme mb-3"></i>
+                    <h5 class="fw-bold"> যুব উন্নয়ন</h5>
+                    <p class="small text-muted">৬,০০০+ যুব উপকৃত</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Awards -->
+<section class="py-5 bg-white position-relative overflow-hidden">
+    <div class="container text-center position-relative">
+        <div class="mb-5">
+            <span class="badge bg-light text-green-theme px-3 py-2 rounded-pill border border-green-theme mb-3"><i
+                    class="fa fa-trophy me-2"></i>স্বীকৃতি</span>
+            <h2 class="display-4 text-secondary mb-3">পুরস্কার ও সম্মাননা</h2>
+            <p class="text-muted lead mx-auto" style="max-width: 600px;">জনসেবা ও সমাজ উন্নয়নে বিশেষ অবদানের জন্য
+                অর্জিত কিছু সম্মাননা</p>
+        </div>
+
+        <div class="row justify-content-center g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm hover-lift transition-all">
+                    <div class="card-body p-4 p-lg-5">
+                        <div class="mb-4">
+                            <div class="icon-circle bg-light text-green-theme mx-auto d-flex align-items-center justify-content-center rounded-circle"
+                                style="width: 80px; height: 80px;">
+                                <i class="fas fa-landmark fa-2x"></i>
+                            </div>
+                        </div>
+                        <span class="badge bg-green-theme mb-3 px-3 py-2 rounded-pill">২০১৩</span>
+                        <h4 class="fw-bold mb-3 h5">পাবলিক সার্ভিসে শ্রেষ্ঠত্ব</h4>
+                        <p class="text-muted small mb-0">জাতীয় শাসন পরিষদ কর্তৃক প্রদত্ত</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm hover-lift transition-all">
+                    <div class="card-body p-4 p-lg-5">
+                        <div class="mb-4">
+                            <div class="icon-circle bg-light text-green-theme mx-auto d-flex align-items-center justify-content-center rounded-circle"
+                                style="width: 80px; height: 80px;">
+                                <i class="fas fa-hands-helping fa-2x"></i>
+                            </div>
+                        </div>
+                        <span class="badge bg-green-theme mb-3 px-3 py-2 rounded-pill">২০১৫</span>
+                        <h4 class="fw-bold mb-3 h5">কমিউনিটি চ্যাম্পিয়ন</h4>
+                        <p class="text-muted small mb-0">সুশীল সমাজ ফোরাম কর্তৃক প্রদত্ত</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm hover-lift transition-all">
+                    <div class="card-body p-4 p-lg-5">
+                        <div class="mb-4">
+                            <div class="icon-circle bg-light text-green-theme mx-auto d-flex align-items-center justify-content-center rounded-circle"
+                                style="width: 80px; height: 80px;">
+                                <i class="fas fa-university fa-2x"></i>
+                            </div>
+                        </div>
+                        <span class="badge bg-green-theme mb-3 px-3 py-2 rounded-pill">২০১৮</span>
+                        <h4 class="fw-bold mb-3 h5">বর্ষসেরা শিক্ষা আইনজীবী</h4>
+                        <p class="text-muted small mb-0">শিক্ষক সমিতি কর্তৃক প্রদত্ত</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

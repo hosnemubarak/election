@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section" style="background: linear-gradient(180deg, #006A4E 0%, #00856B 50%, #00A085 100%);">
+    <div class="container text-white">
+        <div class="row align-items-center flex-column-reverse flex-lg-row">
+            <div class="col-lg-6">
+                <div class="mb-3"><span class="label-secondary"><i class="far fa-star me-2"></i>পরিবর্তনের জন্য ভোট
+                        দিন ২০২৬</span></div>
+                <h1 class="display-2 mb-4">একসাথে গড়ি সুন্দর আগামী</h1>
+                <p class="lead mb-4">সমৃদ্ধি, সমতা ও সবার জন্য সুযোগ-সম্ভাবনায় ভরা একটি ভবিষ্যৎ গড়তে আপনাদের
+                    নেতৃত্বে আমি এগিয়ে যেতে চাই। চলুন, পরিবর্তনের পথে আমরা একসাথে হই।</p>
+                <div class="d-flex gap-3 mb-5">
+                    <a href="{% url 'manifesto' %}" class="btn btn-primary px-4 py-2"><i
+                            class="fas fa-arrow-right me-2"></i>আমার ইশতেহার দেখুন</a>
+                    <a href="{% url 'media' %}" class="btn btn-outline-light px-4 py-2"><i
+                            class="fas fa-arrow-right me-2"></i>ক্যাম্পেইনে সহযোগিতা করুন</a>
+                </div>
+
+                <div class="row text-center text-lg-start">
+                    <div class="col-md-4 mb-3">
+                        <h3 class="fw-bold">৫০০০০+</h3>
+                        <p class="">সমর্থনকারী</p>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <h3 class="fw-bold">২৫+</h3>
+                        <p class="">অভিজ্ঞতা</p>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <h3 class="fw-bold">১০০%</h3>
+                        <p class="">অঙ্গীকার</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center mb-5 mb-lg-0">
+                <img src="{% static 'assets/images/new.png' %}" class="img-fluid rounded" alt="Candidate">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <img src="{% static 'assets/images/Container-5.png' %}" class="img-fluid" alt="About Us">
+            </div>
+            <div class="col-lg-6 ps-lg-5">
+                <div class="mb-2 text-secondary label-secondary"><i class="far fa-star me-2"></i>আমার সম্পর্কে</div>
+                <h2 class="mb-4 display-4 text-secondary">বিশ্বাস, সততা আর কাজ—এটাই আমার পরিচয়</h2>
+                <p>১৫ বছরেরও বেশি সময় ধরে জনসেবা ও কমিউনিটি উন্নয়নে কাজ করে আসছি। মানুষের অধিকার, কল্যাণ এবং
+                    ন্যায়বিচারের পক্ষে কথা বলা—এটাই আমার দায়িত্ব, এটাই আমার অঙ্গীকার।</p>
+                <p>রাজনীতি আমার কাছে ক্ষমতার বিষয় নয়—মানুষের প্রতি দায়বদ্ধতার জায়গা। আমি বিশ্বাস করি স্বচ্ছ রাজনীতি,
+                    মানুষকেন্দ্রিক উন্নয়ন, সমান সুযোগ এবং সবাইকে নিয়ে এগিয়ে চলা।</p>
+                <a href="{% url 'about' %}" class="btn btn-outline-primary col-12 col-md-4"><i
+                        class="fas fa-arrow-right me-2"></i>আরও জানুন</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Manifesto Section -->
+<section class="section-padding">
+    <div class="container text-center">
+        <div class="mb-2 text-secondary label-secondary"><i class="far fa-star me-2"></i>ইশতেহার</div>
+        <h2 class="display-4 mb-5 mt-2 text-secondary">নির্বাচনী ইশতেহার</h2>
+        <p class="mb-5 mx-auto" style="max-width: 700px;">২০২৬ সালের জাতীয় সংসদ নির্বাচনে আমি, নাজমুল মোস্তফা আমিন
+            যদি
+            আপনাদের ভালোবাসা ও ভোটে জয়ী হই — তবে আগামী ৫ বছরে আমার কাছে আপনারা বুঝে নিবেন:</p>
+
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm p-3">
+                    <div class="card-body">
+                        <div class="icon-box"><i class="fas fa-bullseye text-secondary"></i></div>
+                        <h4 class="card-title h5 fw-bold">বেকারত্ব দূরীকরণ</h4>
+                        <p class="card-text small">তরুণদের দক্ষতা উন্নয়নের জন্য ৫ কোটি টাকার ফান্ড গঠন।</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm p-3">
+                    <div class="card-body">
+                        <div class="icon-box"><i class="fas fa-users text-secondary"></i></div>
+                        <h4 class="card-title h5 fw-bold">শিক্ষার মানোন্নয়ন</h4>
+                        <p class="card-text small">কলেজগুলোতে শিক্ষার মান বৃদ্ধিতে নিয়মিত পরিদর্শন।</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm p-3">
+                    <div class="card-body">
+                        <div class="icon-box"><i class="far fa-heart text-secondary"></i></div>
+                        <h4 class="card-title h5 fw-bold">বয়স্ক নাগরিক কল্যাণ</h4>
+                        <p class="card-text small">৬০+ নাগরিকদের জন্য বিশেষ ভাতা ও চিকিৎসা তহবিল।</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm p-3">
+                    <div class="card-body">
+                        <div class="icon-box"><i class="far fa-building text-secondary"></i></div>
+                        <h4 class="card-title h5 fw-bold">দুর্নীতি মুক্ত সমাজ</h4>
+                        <p class="card-text small">দুর্নীতির বিরুদ্ধে জিরো টলারেন্স নীতি।</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <a href="{% url 'manifesto' %}" class="btn btn-outline-primary"><i
+                    class="fas fa-arrow-right me-2"></i>সম্পূর্ণ ইশতেহার দেখুন</a>
+        </div>
+    </div>
+</section>
+
+<!-- Donation Support Details Section -->
+<section class="section-padding" style="background: linear-gradient(180deg, #006A4E 0%, #00856B 50%, #00A085 100%);">
+    <div class="container">
+        <!-- Header Row -->
+        <div class="row mb-5">
+            <div class="col-12 text-center text-white">
+                <div class="mb-3">
+                    <i class="far fa-heart fa-3x"></i>
+                </div>
+                <h2 class="display-5 fw-bold mb-4">আপনার সহযোগিতা বদলে দিতে পারে ভবিষ্যৎ</h2>
+                <p class="lead opacity-90 mx-auto" style="max-width: 800px;">আপনার প্রতিটি অবদান আমাদের আন্দোলনকে
+                    শক্তিশালী করে, আরও মানুষের কাছে পৌঁছাতে সাহায্য করে। আপনার অংশগ্রহণই আমাদের সাফল্যের ভিত্তি।</p>
+            </div>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="row text-center mb-5">
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="bg-white bg-opacity-10 rounded-3 p-4">
+                    <i class="fas fa-dollar-sign fa-3x text-white mb-3"></i>
+                    <h2 class="fw-bold text-white display-5">৫০০০০০+</h2>
+                    <p class="text-white opacity-75">সংগ্রহ</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="bg-white bg-opacity-10 rounded-3 p-4">
+                    <i class="fas fa-users fa-3x text-white mb-3"></i>
+                    <h2 class="fw-bold text-white display-5">৫২০০</h2>
+                    <p class="text-white opacity-75">ব্যক্তিগত সমর্থক</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="bg-white bg-opacity-10 rounded-3 p-4">
+                    <i class="fas fa-bullseye fa-3x text-white mb-3"></i>
+                    <h2 class="fw-bold text-white display-5">৫০০০০</h2>
+                    <p class="text-white opacity-75">লক্ষ্য</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Checklist Row -->
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="bg-white rounded-3 p-4 p-lg-5 shadow-lg">
+                    <h3 class="h4 fw-bold mb-4 text-secondary text-center">সহায়তা যেভাবে কাজে লাগে</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-secondary me-3 mt-1"></i>
+                                    <span>কমিউনিটি উন্নয়ন কর্মসূচি চালু রাখা</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-secondary me-3 mt-1"></i>
+                                    <span>যুবদের দক্ষতা উন্নয়নে সহায়তা</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-secondary me-3 mt-1"></i>
+                                    <span>শিক্ষা ও বৃত্তি উদ্যোগ সম্প্রসারণ</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-secondary me-3 mt-1"></i>
+                                    <span>manসম্মত স্বাস্থ্যসেবা প্রচারণায় অর্থায়ন</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-secondary me-3 mt-1"></i>
+                                    <span>দুর্বল ও প্রান্তিক জনগোষ্ঠীর সহায়তা তহবিল বৃদ্ধি</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-secondary me-3 mt-1"></i>
+                                    <span>পরিষ্কার, সুশাসন ও স্বচ্ছতার প্রচার</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-secondary me-3 mt-1"></i>
+                                    <span>স্থানীয় অবকাঠামো উন্নয়ন প্রকল্প এগিয়ে নেওয়া</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-secondary me-3 mt-1"></i>
+                                    <span>স্বেচ্ছাসেবক প্রশিক্ষণ ও অংশগ্রহণ বাড়ানো</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-secondary me-3 mt-1"></i>
+                                    <span>ডিজিটাল সেবা ও নাগরিক সুবিধা সম্প্রসারণে সহায়তা</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-top text-center">
+                        <a href="{% url 'donation' %}" class="btn btn-outline-primary btn-lg px-5 py-3">
+                            <i class="far fa-heart me-2"></i>সহায়তা করতে চান? এখানে ক্লিক করুন
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Join Us Carousel / Events -->
+<section class="section-padding">
+    <div class="container text-center">
+        <div class="mb-2 text-secondary label-secondary"><i class="far fa-calendar-alt me-2"></i>আসন্ন কার্যক্রম
+        </div>
+        <h2 class="display-4 mb-5 mt-2 mb-5 mx-auto text-secondary">আমাদের কার্যক্রমে যোগ দিন</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <img src="{% static 'assets/images/HomePag1e.png' %}" class="card-img-top" alt="Event 1">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">টাউন হল মিটিং</h5>
+                        <p class="card-text small text-muted"><i class="fas fa-map-marker-alt me-1"></i> ঢাকা
+                            কমিউনিটি সেন্টার</p>
+                        <p class="card-text">খোলামেলা আলোচনায় যুক্ত হন।</p>
+                        <a href="#" class="btn btn-link text-decoration-none p-0 text-secondary">বিস্তারিত দেখুন <i
+                                class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <img src="{% static 'assets/images/HomePage-2.png' %}" class="card-img-top" alt="Event 2">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">ইউথ সামিট</h5>
+                        <p class="card-text small text-muted"><i class="fas fa-map-marker-alt me-1"></i> ন্যাশনাল
+                            ইউনিভার্সিটি</p>
+                        <p class="card-text">যুব সমাজের নেতৃত্ব বিকাশ।</p>
+                        <a href="#" class="btn btn-link text-decoration-none p-0 text-secondary">বিস্তারিত দেখুন <i
+                                class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <img src="{% static 'assets/images/HomePage-1.png' %}" class="card-img-top" alt="Event 3">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">হেলথকেয়ার ওয়ার্কশপ</h5>
+                        <p class="card-text small text-muted"><i class="fas fa-map-marker-alt me-1"></i> সেন্ট্রাল
+                            হাসপাতাল</p>
+                        <p class="card-text">স্বাস্থ্যখাতের উন্নয়ন বিষয়ে মতবিনিময়।</p>
+                        <a href="#" class="btn btn-link text-decoration-none p-0 text-secondary">বিস্তারিত দেখুন <i
+                                class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

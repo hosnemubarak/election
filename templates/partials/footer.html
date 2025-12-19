@@ -1,0 +1,39 @@
+{% load static %}
+<footer class="footer" style="background: linear-gradient(180deg, #006A4E 0%, #00856B 50%, #00A085 100%);">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <img src="{% static 'assets/images/Footer.png' %}" alt="Footer Logo" class="mb-3"
+                    style="height: 40px; width: auto;">
+                <p class="text-white">১৫ বছরেরও বেশি সময় ধরে জনসেবা ও কমিউনিটি উন্নয়নে কাজ করে আসছি।
+                    মানুষের অধিকার, কল্যাণ এবং ন্যায়বিচারের পক্ষে কথা বলা—এটাই আমার অঙ্গীকার।</p>
+            </div>
+            <div class="col-lg-4">
+                <h5 class="fw-bold text-white mb-3">বিভাগসমূহ</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'home' %}" class="text-white mb-2 d-block"><i
+                                class="fas fa-arrow-right me-2 small text-primary"></i>হোম</a></li>
+                    <li><a href="{% url 'about' %}" class="text-white mb-2 d-block"><i
+                                class="fas fa-arrow-right me-2 small text-primary"></i>সম্পর্কে</a></li>
+                    <li><a href="{% url 'manifesto' %}" class="text-white mb-2 d-block"><i
+                                class="fas fa-arrow-right me-2 small text-primary"></i>নির্বাচনী ইশতেহার</a></li>
+                    <li><a href="{% url 'donation' %}" class="text-white mb-2 d-block"><i
+                                class="fas fa-arrow-right me-2 small text-primary"></i>অনুদান</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <h5 class="fw-bold text-white mb-3">যোগাযোগ</h5>
+                <ul class="list-unstyled text-white">
+                    <li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-primary"></i>Jln Cempaka Wangi No 22,
+                        Jakarta</li>
+                    <li class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i>support@yourdomain.tld</li>
+                    <li class="mb-2"><i class="fas fa-phone-alt me-2 text-primary"></i>+123 456 7890</li>
+                </ul>
+            </div>
+        </div>
+        <hr class="border-secondary my-4">
+        <div class="text-center text-white-50 small">
+            &copy; 2026 Nazmul Mostafa Amin. All rights reserved.
+        </div>
+    </div>
+</footer>

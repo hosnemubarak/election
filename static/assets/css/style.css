@@ -1,0 +1,272 @@
+/* Global CSS Variables - Extracted from original Nazmul Mostafa Amin */
+:root {
+  /* Colors - Exact match from original site */
+  --wp--preset--color--black: #000000;
+  --wp--preset--color--cyan-bluish-gray: #abb8c3;
+  --wp--preset--color--white: #ffffff;
+  --wp--preset--color--pale-pink: #f78da7;
+  --wp--preset--color--vivid-red: #cf2e2e;
+  /* Primary brand color */
+  --wp--preset--color--luminous-vivid-orange: #ff6900;
+  --wp--preset--color--luminous-vivid-amber: #fcb900;
+  --wp--preset--color--light-green-cyan: #7bdcb5;
+  --wp--preset--color--vivid-green-cyan: #00d084;
+  --wp--preset--color--pale-cyan-blue: #8ed1fc;
+  --wp--preset--color--vivid-cyan-blue: #0693e3;
+  --wp--preset--color--vivid-purple: #9b51e0;
+  --wp--preset--color--vivid-green-hard: #006A4E;
+  
+
+  /* Gradients */
+  --wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg, rgba(6, 147, 227, 1) 0%, rgb(155, 81, 224) 100%);
+  --wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg, rgb(122, 220, 180) 0%, rgb(0, 208, 130) 100%);
+  --wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg, rgba(252, 185, 0, 1) 0%, rgba(255, 105, 0, 1) 100%);
+  --wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg, rgba(255, 105, 0, 1) 0%, rgb(207, 46, 46) 100%);
+  --wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg, rgb(238, 238, 238) 0%, rgb(169, 184, 195) 100%);
+  --wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg, rgb(74, 234, 220) 0%, rgb(151, 120, 209) 20%, rgb(207, 42, 186) 40%, rgb(238, 44, 130) 60%, rgb(251, 105, 98) 80%, rgb(254, 248, 76) 100%);
+  --wp--preset--gradient--blush-light-purple: linear-gradient(135deg, rgb(255, 206, 236) 0%, rgb(152, 150, 240) 100%);
+  --wp--preset--gradient--blush-bordeaux: linear-gradient(135deg, rgb(254, 205, 165) 0%, rgb(254, 45, 45) 50%, rgb(107, 0, 62) 100%);
+  --wp--preset--gradient--luminous-dusk: linear-gradient(135deg, rgb(255, 203, 112) 0%, rgb(199, 81, 192) 50%, rgb(65, 88, 208) 100%);
+  --wp--preset--gradient--pale-ocean: linear-gradient(135deg, rgb(255, 245, 203) 0%, rgb(182, 227, 212) 50%, rgb(51, 167, 181) 100%);
+  --wp--preset--gradient--electric-grass: linear-gradient(135deg, rgb(202, 248, 128) 0%, rgb(113, 206, 126) 100%);
+  --wp--preset--gradient--midnight: linear-gradient(135deg, rgb(2, 3, 129) 0%, rgb(40, 116, 252) 100%);
+
+  /* Font Sizes */
+  --wp--preset--font-size--small: 13px;
+  --wp--preset--font-size--medium: 20px;
+  --wp--preset--font-size--large: 36px;
+  --wp--preset--font-size--x-large: 42px;
+
+  /* Spacing */
+  --wp--preset--spacing--20: 0.44rem;
+  --wp--preset--spacing--30: 0.67rem;
+  --wp--preset--spacing--40: 1rem;
+  --wp--preset--spacing--50: 1.5rem;
+  --wp--preset--spacing--60: 2.25rem;
+  --wp--preset--spacing--70: 3.38rem;
+  --wp--preset--spacing--80: 5.06rem;
+
+  /* Shadows */
+  --wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);
+  --wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);
+  --wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);
+  --wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);
+  --wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);
+
+  /* Secondary Brand Color (Hard Green) */
+  --secondary: #006A4E;
+  --secondary-hover: #005a41;
+  --secondary-light: #00856B;
+  --secondary-dark: #004d39;
+}
+
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Archivo', sans-serif;
+}
+
+/* Primary Color Utilities - Using exact #cf2e2e from original site */
+.text-primary,
+.text-danger {
+  color: var(--wp--preset--color--vivid-red) !important;
+}
+
+.bg-primary,
+.bg-danger {
+  background-color: var(--wp--preset--color--vivid-red) !important;
+}
+
+.border-primary,
+.border-danger {
+  border-color: var(--wp--preset--color--vivid-red) !important;
+}
+
+.btn-primary,
+.btn-danger {
+  background-color: var(--wp--preset--color--vivid-red) !important;
+  border-color: var(--wp--preset--color--vivid-red) !important;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-weight: 500;
+  color: white !important;
+}
+
+.btn-primary:hover,
+.btn-danger:hover {
+  background-color: #b82626 !important;
+  border-color: #b82626 !important;
+}
+
+.btn-outline-primary,
+.btn-outline-danger {
+  color: var(--wp--preset--color--vivid-red) !important;
+  border-color: var(--wp--preset--color--vivid-red) !important;
+  background: transparent !important;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-weight: 500;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-danger:hover {
+  background-color: var(--wp--preset--color--vivid-red) !important;
+  color: white !important;
+}
+
+/* Links */
+a {
+  color: var(--wp--preset--color--vivid-red);
+  text-decoration: none;
+}
+
+a:hover {
+  color: #b82626;
+}
+
+/* Green Color Utilities - Secondary theme color */
+.text-success,
+.text-green {
+  color: var(--wp--preset--color--vivid-green-cyan) !important;
+}
+
+.bg-success,
+.bg-green {
+  background-color: var(--wp--preset--color--vivid-green-cyan) !important;
+}
+
+.bg-light-green {
+  background-color: var(--wp--preset--color--light-green-cyan) !important;
+}
+
+.bg-gradient-green {
+  background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;
+  color: white;
+}
+
+.bg-gradient-electric {
+  background: var(--wp--preset--gradient--electric-grass) !important;
+  color: white;
+}
+
+.btn-success {
+  background-color: var(--wp--preset--color--vivid-green-cyan) !important;
+  border-color: var(--wp--preset--color--vivid-green-cyan) !important;
+  color: white !important;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-weight: 500;
+}
+
+.btn-success:hover {
+  background-color: #00b872 !important;
+  border-color: #00b872 !important;
+}
+
+.btn-outline-success {
+  color: var(--wp--preset--color--vivid-green-cyan) !important;
+  border-color: var(--wp--preset--color--vivid-green-cyan) !important;
+  background: transparent !important;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-weight: 500;
+}
+
+.btn-outline-success:hover {
+  background-color: var(--wp--preset--color--vivid-green-cyan) !important;
+  color: white !important;
+}
+
+.text-secondary {
+  color: var(--secondary) !important;
+}
+
+.bg-secondary {
+  background-color: var(--secondary) !important;
+  color: #ffffff;
+}
+
+.border-secondary {
+  border-color: var(--secondary) !important;
+}
+
+.btn-secondary {
+  background-color: var(--secondary) !important;
+  border-color: var(--secondary) !important;
+  color: #ffffff !important;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-weight: 500;
+}
+
+.btn-secondary:hover {
+  background-color: var(--secondary-hover) !important;
+  border-color: var(--secondary-hover) !important;
+}
+
+/* Outline */
+.btn-outline-secondary {
+  color: var(--secondary) !important;
+  border-color: var(--secondary) !important;
+  background: transparent !important;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-weight: 500;
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--secondary) !important;
+  color: #ffffff !important;
+}
+
+.bg-gradient-secondary {
+  background: linear-gradient(
+    180deg,
+    #006A4E 0%,
+    #00856B 50%,
+    #00A085 100%
+  ) !important;
+  color: #ffffff;
+}
+
+.bg-gradient-secondary-soft {
+  background: linear-gradient(
+    135deg,
+    #004d39 0%,
+    #006A4E 50%,
+    #00856B 100%
+  ) !important;
+  color: #ffffff;
+}
+
+a.link-secondary {
+  color: var(--secondary);
+}
+
+a.link-secondary:hover {
+  color: var(--secondary-hover);
+}
+
+
+
+.text-theme-primary {
+  color: var(--e-global-color-primary);
+  transition: color 0.3s ease;
+}
+
+.text-theme-primary:hover {
+  color: var(--e-global-color-secondary, #006A4E);
+}
+
+.label-secondary {
+  background-color: rgba(0, 106, 78, 0.08); /* light secondary */
+  color: var(--secondary, #006A4E);
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+}
+

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Services - Election Site{% endblock %}
+
+{% block content %}
+<section class="section-padding">
+    <div class="container">
+        <h1 class="display-4 mb-4 text-center">Our Services / Manifesto</h1>
+        <div class="row g-4">
+            <!-- Example Service Item -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-4 text-center">
+                    <div class="mb-3"><i class="fas fa-bullseye fa-3x text-secondary"></i></div>
+                    <h3>Unemployment</h3>
+                    <p>Creating funds for youth skill development.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-4 text-center">
+                    <div class="mb-3"><i class="fas fa-book fa-3x text-secondary"></i></div>
+                    <h3>Education</h3>
+                    <p>Improving quality of education in colleges.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-4 text-center">
+                    <div class="mb-3"><i class="fas fa-heart fa-3x text-secondary"></i></div>
+                    <h3>Healthcare</h3>
+                    <p>Special allowances and medical funds for seniors.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
