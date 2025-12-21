@@ -1,5 +1,5 @@
 <div class="col-md-4">
-    <a href="{% url 'video_detail' video.pk %}" class="text-decoration-none">
+    <a href="{% url 'video_detail' video.slug %}" class="text-decoration-none">
         <div class="video-card shadow-sm">
             <img src="{{ video.thumbnail.url }}" alt="{{ video.title }}" class="img-fluid w-100">
             <div class="video-overlay">

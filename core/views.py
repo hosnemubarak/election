@@ -13,8 +13,8 @@ def events(request):
     events = Event.objects.all()
     return render(request, 'events.html', {'events': events})
 
-def event_detail(request, pk):
-    event = get_object_or_404(Event, pk=pk)
+def event_detail(request, slug):
+    event = get_object_or_404(Event, slug=slug)
     return render(request, 'event_detail.html', {'event': event})
 
 def about(request):
@@ -32,16 +32,16 @@ def press_releases(request):
     press_releases = PressRelease.objects.all()
     return render(request, 'press_releases.html', {'press_releases': press_releases})
 
-def press_release_detail(request, pk):
-    press = get_object_or_404(PressRelease, pk=pk)
+def press_release_detail(request, slug):
+    press = get_object_or_404(PressRelease, slug=slug)
     return render(request, 'press_release_detail.html', {'press': press})
 
 def videos(request):
     videos = Video.objects.all()
     return render(request, 'videos.html', {'videos': videos})
 
-def video_detail(request, pk):
-    video = get_object_or_404(Video, pk=pk)
+def video_detail(request, slug):
+    video = get_object_or_404(Video, slug=slug)
     return render(request, 'video_detail.html', {'video': video})
 
 

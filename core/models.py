@@ -1,4 +1,11 @@
 from django.db import models
+from django.utils.text import slugify
+import re
+
+def custom_slugify(value):
+    # Keep Bangla characters, alphanumeric, and hyphens
+    value = re.sub(r'[^\u0980-\u09ff\w\s-]', '', value)
+    return re.sub(r'[-\s]+', '-', value).strip('-')
 
 class Event(models.Model):
     title = models.CharField(max_length=200)
@@ -6,6 +13,12 @@ class Event(models.Model):
     location = models.CharField(max_length=200)
     description = models.TextField()
     image = models.ImageField(upload_to='events/')
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = custom_slugify(self.title)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -18,6 +31,12 @@ class PressRelease(models.Model):
     content = models.TextField()
     document = models.FileField(upload_to='press_releases/docs/', blank=True, null=True)
     image = models.ImageField(upload_to='press_releases/images/', blank=True, null=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = custom_slugify(self.title)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -27,6 +46,12 @@ class Video(models.Model):
     youtube_url = models.URLField()
     thumbnail = models.ImageField(upload_to='videos/')
     created_at = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = custom_slugify(self.title)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -62,4 +87,3 @@ class ContactMessage(models.Model):
     
     def __str__(self):
         return f"{self.name} - {self.department} ({self.created_at.strftime('%d %b %Y')})"
-

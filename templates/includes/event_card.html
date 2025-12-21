@@ -12,7 +12,7 @@
                 {{ event.location }}
             </p>
             <p class="card-text">{{ event.description|truncatewords:20 }}</p>
-            <a href="{% url 'event_detail' event.pk %}"
+            <a href="{% url 'event_detail' event.slug %}"
                 class="btn btn-link text-decoration-none p-0 text-secondary">বিস্তারিত দেখুন <i
                     class="fas fa-arrow-right ms-1"></i></a>
         </div>
