@@ -7,6 +7,9 @@ set -e
 
 echo "Starting Django application..."
 
+# Create logs directory if it doesn't exist (must be before Django setup)
+mkdir -p /app/logs
+
 # Wait for database to be ready
 echo "Waiting for PostgreSQL to be ready..."
 while ! nc -z $DB_HOST $DB_PORT; do
@@ -23,9 +26,6 @@ if [ "$DEBUG" = "False" ]; then
     echo "Collecting static files..."
     python manage.py collectstatic --noinput
 fi
-
-# Create logs directory if it doesn't exist
-mkdir -p /app/logs
 
 echo "Starting application server..."
 
