@@ -12,13 +12,19 @@ class Event(models.Model):
     date = models.DateField()
     location = models.CharField(max_length=200)
     description = models.TextField()
-    image = models.ImageField(upload_to='events/')
+    image = models.ImageField(upload_to='events/', blank=True, null=True)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = custom_slugify(self.title)
         super().save(*args, **kwargs)
+
+    def get_image_url(self):
+        """Return image URL or default image if no image uploaded"""
+        if self.image:
+            return self.image.url
+        return '/static/assets/images/thumbnil.png'
 
     def __str__(self):
         return self.title
@@ -44,7 +50,7 @@ class PressRelease(models.Model):
 class Video(models.Model):
     title = models.CharField(max_length=200)
     youtube_url = models.URLField()
-    thumbnail = models.ImageField(upload_to='videos/')
+    thumbnail = models.ImageField(upload_to='videos/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
 
@@ -52,6 +58,12 @@ class Video(models.Model):
         if not self.slug:
             self.slug = custom_slugify(self.title)
         super().save(*args, **kwargs)
+
+    def get_thumbnail_url(self):
+        """Return thumbnail URL or default image if no thumbnail uploaded"""
+        if self.thumbnail:
+            return self.thumbnail.url
+        return '/static/assets/images/thumbnil.png'
 
     def __str__(self):
         return self.title

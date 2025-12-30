@@ -1,6 +1,6 @@
 <div class="col-md-4">
     <div class="card h-100 border-0 shadow-sm">
-        <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.title }}">
+        <img src="{{ event.get_image_url }}" class="card-img-top" alt="{{ event.title }}">
         <div class="card-body">
             <h5 class="card-title fw-bold">{{ event.title }}</h5>
             <p class="card-text small text-muted mb-1">
