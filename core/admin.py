@@ -6,21 +6,21 @@ class EventAdmin(admin.ModelAdmin):
     list_display = ('title', 'date', 'location')
     search_fields = ('title', 'location')
     list_filter = ('date',)
-    prepopulated_fields = {'slug': ('title',)}
+    exclude = ('slug',)
 
 @admin.register(PressRelease)
 class PressReleaseAdmin(admin.ModelAdmin):
     list_display = ('title', 'date', 'category')
     search_fields = ('title', 'category')
     list_filter = ('date', 'category')
-    prepopulated_fields = {'slug': ('title',)}
+    exclude = ('slug',)
 
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_at')
     search_fields = ('title',)
     list_filter = ('created_at',)
-    prepopulated_fields = {'slug': ('title',)}
+    exclude = ('slug',)
 
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
