@@ -11,7 +11,7 @@ urlpatterns = [
     path('videos/<str:slug>/', views.video_detail, name='video_detail'),
     path('about/', views.about, name='about'),
     path('manifesto/', views.manifesto, name='manifesto'),
-    path('media/', views.media, name='media'),
+    path('press-release/', views.media, name='media'),
     path('contact/', views.contact, name='contact'),
     path('captcha/', include('captcha.urls')),
 ]
