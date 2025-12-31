@@ -34,15 +34,15 @@ fi
 
 # Build production images
 echo "Building production Docker images..."
-docker-compose -f docker-compose.prod.yml build
+docker compose -f docker-compose.prod.yml build
 
 # Stop existing containers
 echo "Stopping existing containers..."
-docker-compose -f docker-compose.prod.yml down
+docker compose -f docker-compose.prod.yml down
 
 # Start new containers
 echo "Starting production containers..."
-docker-compose -f docker-compose.prod.yml up -d
+docker compose -f docker-compose.prod.yml up -d
 
 # Wait for services to be ready
 echo "Waiting for services to start..."
@@ -50,11 +50,11 @@ sleep 10
 
 # Run migrations
 echo "Running database migrations..."
-docker-compose -f docker-compose.prod.yml exec web python manage.py migrate
+docker compose -f docker-compose.prod.yml exec web python manage.py migrate
 
 # Collect static files
 echo "Collecting static files..."
-docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --noinput
+docker compose -f docker-compose.prod.yml exec web python manage.py collectstatic --noinput
 
 echo ""
 echo "=========================================="
@@ -63,11 +63,11 @@ echo "=========================================="
 echo ""
 echo "Next steps:"
 echo "  1. Create superuser (if needed):"
-echo "     docker-compose -f docker-compose.prod.yml exec web python manage.py createsuperuser"
+echo "     docker compose -f docker-compose.prod.yml exec web python manage.py createsuperuser"
 echo ""
 echo "  2. Check service status:"
-echo "     docker-compose -f docker-compose.prod.yml ps"
+echo "     docker compose -f docker-compose.prod.yml ps"
 echo ""
 echo "  3. View logs:"
-echo "     docker-compose -f docker-compose.prod.yml logs -f"
+echo "     docker compose -f docker-compose.prod.yml logs -f"
 echo ""
