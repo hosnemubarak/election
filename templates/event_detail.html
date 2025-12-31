@@ -2,54 +2,65 @@
 {% load static %}
 
 {% block content %}
-<section class="section-padding">
+<!-- Hero Image Section -->
+<section class="position-relative" style="height: 60vh; min-height: 400px; max-height: 600px; overflow: hidden;">
+    <img src="{{ event.get_image_url }}" class="w-100 h-100" style="object-fit: cover;" alt="{{ event.title }}">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));"></div>
+    <div class="position-absolute bottom-0 start-0 w-100 p-4 p-md-5 text-white">
+        <div class="container">
+            <nav aria-label="breadcrumb" class="mb-3">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-white text-decoration-none">হোম</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'events' %}" class="text-white text-decoration-none">কার্যক্রম</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">{{ event.title }}</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 fw-bold mb-3">{{ event.title }}</h1>
+            <div class="d-flex align-items-center gap-4 flex-wrap">
+                <span class="fs-5">
+                    <i class="fas fa-calendar-alt me-2"></i>
+                    {{ event.date|date:"d M Y" }}
+                </span>
+                <span class="fs-5">
+                    <i class="fas fa-map-marker-alt me-2"></i>
+                    {{ event.location }}
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Content Section -->
+<section class="py-5">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <nav aria-label="breadcrumb" class="mb-4">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{% url 'home' %}">হোম</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'events' %}">কার্যক্রম</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ event.title }}</li>
-                    </ol>
-                </nav>
-
-                <div class="card border-0 shadow-lg overflow-hidden">
-                    <img src="{{ event.get_image_url }}" class="card-img-top" alt="{{ event.title }}">
-                    <div class="card-body p-4 p-md-5">
-                        <div class="d-flex align-items-center text-muted mb-3">
-                            <span class="me-3">
-                                <i class="fas fa-calendar-alt me-2"></i>
-                                {{ event.date|date:"d M Y" }}
-                            </span>
-                            <span>
-                                <i class="fas fa-map-marker-alt me-2"></i>
-                                {{ event.location }}
-                            </span>
-                        </div>
-                        <h1 class="display-5 fw-bold mb-4">{{ event.title }}</h1>
-                        <div class="lead text-secondary mb-4">
-                            {{ event.description|linebreaks }}
-                        </div>
-                        <div class="mt-5 pt-4 border-top">
-                            <h4 class="h5 fw-bold mb-3">এই ইভেন্টটি শেয়ার করুন:</h4>
+            <div class="col-lg-10 col-xl-9">
+                <article class="bg-white rounded-4 shadow-sm p-4 p-md-5">
+                    <div class="content fs-5 lh-lg text-dark" style="text-align: justify;">
+                        {{ event.description|linebreaks }}
+                    </div>
+                    
+                    <!-- Share Section -->
+                    <div class="mt-5 pt-5 border-top">
+                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                            <h4 class="h5 fw-bold mb-0">এই ইভেন্টটি শেয়ার করুন:</h4>
                             <div class="d-flex gap-2">
                                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
-                                    target="_blank" class="btn btn-outline-primary btn-sm">
-                                    <i class="fab fa-facebook-f"></i>
+                                    target="_blank" class="btn btn-primary">
+                                    <i class="fab fa-facebook-f me-2"></i>Facebook
                                 </a>
                                 <a href="https://twitter.com/intent/tweet?text={{ event.title }}&url={{ request.build_absolute_uri }}"
-                                    target="_blank" class="btn btn-outline-info btn-sm">
-                                    <i class="fab fa-twitter"></i>
+                                    target="_blank" class="btn btn-info text-white">
+                                    <i class="fab fa-twitter me-2"></i>Twitter
                                 </a>
-                                <button onclick="copyToClipboard()" class="btn btn-outline-secondary btn-sm"
+                                <button onclick="copyToClipboard()" class="btn btn-secondary"
                                     id="copyBtn">
-                                    <i class="fas fa-link"></i>
+                                    <i class="fas fa-link me-2"></i>লিংক কপি
                                 </button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
     </div>
