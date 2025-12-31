@@ -6,6 +6,8 @@ services:
     container_name: election_db_prod
     volumes:
       - postgres_data_prod:/var/lib/postgresql/data
+    env_file:
+      - .env
     environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
