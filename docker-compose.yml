@@ -19,21 +19,6 @@ services:
     networks:
       - election_network
 
-  redis:
-    image: redis:7-alpine
-    container_name: election_redis_dev
-    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
-    volumes:
-      - redis_data:/data
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - election_network
-
   web:
     build:
       context: .
@@ -59,8 +44,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-      redis:
-        condition: service_healthy
     stdin_open: true
     tty: true
     networks:
@@ -68,7 +51,6 @@ services:
 
 volumes:
   postgres_data_dev:
-  redis_data:
   static_volume_dev:
   media_volume_dev:
 
