@@ -16,10 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.sitemaps.views import sitemap
+from core.sitemaps import StaticViewSitemap, EventSitemap, PressReleaseSitemap, VideoSitemap
+
+# Sitemap configuration
+# Dictionary maps sitemap names to sitemap classes
+sitemaps = {
+    'static': StaticViewSitemap,        # Static pages (home, about, etc.)
+    'events': EventSitemap,             # Event detail pages
+    'press': PressReleaseSitemap,       # Press release detail pages
+    'videos': VideoSitemap,             # Video detail pages
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
+    # Sitemap URL - accessible at /sitemap.xml
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]
 
 # Custom error handlers
@@ -30,6 +43,12 @@ handler400 = 'core.views.custom_400'
 
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
+
+# Serve robots.txt
+urlpatterns += [
+    path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
