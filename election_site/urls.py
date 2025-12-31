@@ -43,11 +43,11 @@ handler400 = 'core.views.custom_400'
 
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.generic import TemplateView
+from core.views import robots_txt
 
 # Serve robots.txt
 urlpatterns += [
-    path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
+    path('robots.txt', robots_txt, name='robots_txt'),
 ]
 
 if settings.DEBUG:

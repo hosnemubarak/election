@@ -80,3 +80,23 @@ def custom_403(request, exception):
 def custom_400(request, exception):
     return render(request, '400.html', status=400)
 
+def robots_txt(request):
+    """Serve robots.txt file"""
+    from django.http import HttpResponse
+    lines = [
+        "# robots.txt for najmulmostafaamin.com",
+        "# This file tells search engines which pages to crawl",
+        "",
+        "# Allow all search engines to crawl all pages",
+        "User-agent: *",
+        "Allow: /",
+        "",
+        "# Disallow admin panel (security best practice)",
+        "Disallow: /admin/",
+        "",
+        "# Sitemap location",
+        "# Search engines will automatically discover and crawl all pages listed here",
+        "Sitemap: https://najmulmostafaamin.com/sitemap.xml",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
+
