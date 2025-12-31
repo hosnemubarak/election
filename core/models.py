@@ -60,9 +60,22 @@ class Video(models.Model):
         super().save(*args, **kwargs)
 
     def get_thumbnail_url(self):
-        """Return thumbnail URL or default image if no thumbnail uploaded"""
+        """Return thumbnail URL, YouTube thumbnail, or default image"""
         if self.thumbnail:
             return self.thumbnail.url
+        
+        # Try to get YouTube thumbnail
+        video_id = self.get_video_id()
+        if video_id:
+            # YouTube provides thumbnails at different qualities
+            # maxresdefault.jpg (1920x1080) - highest quality
+            # sddefault.jpg (640x480) - standard quality
+            # hqdefault.jpg (480x360) - high quality
+            # mqdefault.jpg (320x180) - medium quality
+            # default.jpg (120x90) - default quality
+            return f'https://img.youtube.com/vi/{video_id}/maxresdefault.jpg'
+        
+        # Fallback to static default image
         return '/static/assets/images/thumbnil.png'
 
     def __str__(self):
