@@ -40,11 +40,11 @@ def manifesto(request):
     return render(request, 'manifesto.html')
 
 @cache_page(CACHE_TIMEOUT_SHORT)
-def media(request):
-    """Media page with latest press releases and videos - cached for 5 minutes"""
+def news_media(request):
+    """News media page with latest press releases and videos - cached for 5 minutes"""
     press_releases = PressRelease.objects.all()[:3]
     videos = Video.objects.all()[:3]
-    return render(request, 'media.html', {'press_releases': press_releases, 'videos': videos})
+    return render(request, 'news_media.html', {'press_releases': press_releases, 'videos': videos})
 
 @cache_page(CACHE_TIMEOUT_MEDIUM)
 def press_releases(request):

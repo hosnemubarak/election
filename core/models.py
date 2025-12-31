@@ -139,14 +139,14 @@ def invalidate_event_cache(sender, instance, **kwargs):
     # Clear all event-related cache keys
     cache.delete_pattern('election:*:home:*')
     cache.delete_pattern('election:*:events:*')
-    cache.delete_pattern('election:*:media:*')
+    cache.delete_pattern('election:*:news_media:*')
     cache.delete_pattern(f'election:*:event_detail:{instance.slug}:*')
 
 
 @receiver([post_save, post_delete], sender=PressRelease)
 def invalidate_press_cache(sender, instance, **kwargs):
     """Clear press release-related caches when a press release is created, updated, or deleted"""
-    cache.delete_pattern('election:*:media:*')
+    cache.delete_pattern('election:*:news_media:*')
     cache.delete_pattern('election:*:press_releases:*')
     cache.delete_pattern(f'election:*:press_release_detail:{instance.slug}:*')
 
@@ -154,6 +154,6 @@ def invalidate_press_cache(sender, instance, **kwargs):
 @receiver([post_save, post_delete], sender=Video)
 def invalidate_video_cache(sender, instance, **kwargs):
     """Clear video-related caches when a video is created, updated, or deleted"""
-    cache.delete_pattern('election:*:media:*')
+    cache.delete_pattern('election:*:news_media:*')
     cache.delete_pattern('election:*:videos:*')
     cache.delete_pattern(f'election:*:video_detail:{instance.slug}:*')
