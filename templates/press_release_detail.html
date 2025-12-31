@@ -2,102 +2,64 @@
 {% load static %}
 
 {% block content %}
-<!-- Hero Image Section -->
-{% if press.image %}
-<section class="position-relative" style="height: 60vh; min-height: 400px; max-height: 600px; overflow: hidden;">
-    <img src="{{ press.image.url }}" class="w-100 h-100" style="object-fit: cover;" alt="{{ press.title }}">
-    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));"></div>
-    <div class="position-absolute bottom-0 start-0 w-100 p-4 p-md-5 text-white">
-        <div class="container">
-            <nav aria-label="breadcrumb" class="mb-3">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-white text-decoration-none">হোম</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'media' %}" class="text-white text-decoration-none">মিডিয়া</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'press_releases' %}" class="text-white text-decoration-none">প্রেস রিলিজ</a></li>
-                    <li class="breadcrumb-item active text-white" aria-current="page">{{ press.title }}</li>
-                </ol>
-            </nav>
-            <h1 class="display-4 fw-bold mb-3">{{ press.title }}</h1>
-            <div class="d-flex align-items-center gap-4 flex-wrap">
-                <span class="fs-5">
-                    <i class="fas fa-calendar-alt me-2"></i>
-                    {{ press.date|date:"d M Y" }}
-                </span>
-                <span class="badge bg-light text-dark fs-6 px-3 py-2">{{ press.category }}</span>
-            </div>
-        </div>
-    </div>
-</section>
-{% else %}
-<!-- Header Section without Image -->
-<section class="bg-dark text-white py-5">
-    <div class="container py-4">
-        <nav aria-label="breadcrumb" class="mb-3">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-white text-decoration-none">হোম</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'media' %}" class="text-white text-decoration-none">মিডিয়া</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'press_releases' %}" class="text-white text-decoration-none">প্রেস রিলিজ</a></li>
-                <li class="breadcrumb-item active text-white" aria-current="page">{{ press.title }}</li>
-            </ol>
-        </nav>
-        <h1 class="display-4 fw-bold mb-3">{{ press.title }}</h1>
-        <div class="d-flex align-items-center gap-4 flex-wrap">
-            <span class="fs-5">
-                <i class="fas fa-calendar-alt me-2"></i>
-                {{ press.date|date:"d M Y" }}
-            </span>
-            <span class="badge bg-light text-dark fs-6 px-3 py-2">{{ press.category }}</span>
-        </div>
-    </div>
-</section>
-{% endif %}
-
-<!-- Content Section -->
-<section class="py-5">
+<section class="section-padding">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-10 col-xl-9">
-                <article class="bg-white rounded-4 shadow-sm p-4 p-md-5">
-                    <!-- Summary -->
-                    <div class="lead text-secondary mb-5 pb-4 border-bottom" style="font-size: 1.25rem; line-height: 1.8;">
-                        {{ press.summary }}
-                    </div>
-                    
-                    <!-- Main Content -->
-                    <div class="content fs-5 lh-lg text-dark mb-5" style="text-align: justify;">
-                        {{ press.content|linebreaks }}
-                    </div>
+            <div class="col-lg-11 col-xl-10">
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">হোম</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'media' %}">মিডিয়া</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'press_releases' %}">প্রেস রিলিজ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ press.title }}</li>
+                    </ol>
+                </nav>
 
-                    <!-- Document Download -->
-                    {% if press.document %}
-                    <div class="mb-5 p-4 bg-light rounded-3">
-                        <a href="{{ press.document.url }}" class="btn btn-dark btn-lg" download>
-                            <i class="fas fa-file-download me-2"></i>ডকুমেন্ট ডাউনলোড করুন
-                        </a>
-                    </div>
+                <div class="card border-0 shadow-lg overflow-hidden">
+                    {% if press.image %}
+                    <img src="{{ press.image.url }}" class="card-img-top" alt="{{ press.title }}">
                     {% endif %}
+                    <div class="card-body p-4 p-md-5">
+                        <div class="d-flex align-items-center text-muted mb-3">
+                            <i class="far fa-calendar-alt text-secondary me-2"></i>
+                            <span class="me-3">{{ press.date|date:"d M Y" }}</span>
+                            <span class="badge bg-secondary-soft text-secondary ms-auto">{{ press.category }}</span>
+                        </div>
+                        <h1 class="display-5 fw-bold mb-4">{{ press.title }}</h1>
+                        <div class="lead text-secondary mb-4">
+                            {{ press.summary }}
+                        </div>
+                        <div class="content mb-5">
+                            {{ press.content|linebreaks }}
+                        </div>
 
-                    <!-- Share Section -->
-                    <div class="mt-5 pt-5 border-top">
-                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                            <h4 class="h5 fw-bold mb-0">শেয়ার করুন:</h4>
+                        {% if press.document %}
+                        <div class="mb-5">
+                            <a href="{{ press.document.url }}" class="btn btn-outline-dark" download>
+                                <i class="fas fa-file-download me-2"></i>ডকুমেন্ট ডাউনলোড করুন
+                            </a>
+                        </div>
+                        {% endif %}
+
+                        <div class="mt-5 pt-4 border-top">
+                            <h4 class="h5 fw-bold mb-3">শেয়ার করুন:</h4>
                             <div class="d-flex gap-2">
                                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
-                                    target="_blank" class="btn btn-primary">
-                                    <i class="fab fa-facebook-f me-2"></i>Facebook
+                                    target="_blank" class="btn btn-outline-primary btn-sm">
+                                    <i class="fab fa-facebook-f"></i>
                                 </a>
                                 <a href="https://twitter.com/intent/tweet?text={{ press.title }}&url={{ request.build_absolute_uri }}"
-                                    target="_blank" class="btn btn-info text-white">
-                                    <i class="fab fa-twitter me-2"></i>Twitter
+                                    target="_blank" class="btn btn-outline-info btn-sm">
+                                    <i class="fab fa-twitter"></i>
                                 </a>
-                                <button onclick="copyToClipboard()" class="btn btn-secondary"
+                                <button onclick="copyToClipboard()" class="btn btn-outline-secondary btn-sm"
                                     id="copyBtn">
-                                    <i class="fas fa-link me-2"></i>লিংক কপি
+                                    <i class="fas fa-link"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
-                </article>
+                </div>
             </div>
         </div>
     </div>
