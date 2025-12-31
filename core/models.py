@@ -26,6 +26,9 @@ class Event(models.Model):
             return self.image.url
         return '/static/assets/images/thumbnil.png'
 
+    class Meta:
+        ordering = ['-date']
+
     def __str__(self):
         return self.title
 
@@ -43,6 +46,9 @@ class PressRelease(models.Model):
         if not self.slug:
             self.slug = custom_slugify(self.title)
         super().save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['-date']
 
     def __str__(self):
         return self.title
@@ -77,6 +83,9 @@ class Video(models.Model):
         
         # Fallback to static default image
         return '/static/assets/images/thumbnil.png'
+
+    class Meta:
+        ordering = ['-created_at']
 
     def __str__(self):
         return self.title
