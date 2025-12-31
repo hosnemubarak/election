@@ -67,35 +67,65 @@ docker-compose exec web python manage.py createsuperuser
 - ✓ Debug mode enabled
 - ✓ Direct port access
 
-## 🏭 Production Deployment
+## 🏭 Production Deployment for najmulmostafaamin.com
 
-### 1. Server Setup
+### Prerequisites
+
+- VPS/Server with Ubuntu 20.04+ or similar
+- Domain: najmulmostafaamin.com pointed to your server IP
+- Docker and Docker Compose installed
+- Ports 80 and 443 open
+
+### 1. DNS Configuration (Do First)
+
+Point your domain to your server:
+
+**A Records:**
+- `najmulmostafaamin.com` → Your Server IP Address
+- `www.najmulmostafaamin.com` → Your Server IP Address
+
+Wait for DNS propagation (can take up to 48 hours, usually 15-30 minutes).
+
+### 2. Server Setup
 
 ```bash
-# Clone repository
-git clone <repository-url>
-cd election
+# Update system
+sudo apt update && sudo apt upgrade -y
 
-# Copy and configure environment
-cp .env.example .env
+# Install Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo usermod -aG docker $USER
+
+# Install Docker Compose
+sudo apt install docker-compose -y
+
+# Clone repository
+git clone <your-repository-url>
+cd election
+```
+
+### 3. Configure Production Environment
+
+Create `.env` file with production settings:
+
+```bash
 nano .env
 ```
 
-### 2. Configure Production Environment
-
-Edit `.env` with production settings:
+Add the following (replace values with your own):
 
 ```env
 # Django Settings
-SECRET_KEY=<generate-strong-secret-key>
+SECRET_KEY=GENERATE-NEW-SECRET-KEY-HERE
 DEBUG=False
-ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
+ALLOWED_HOSTS=najmulmostafaamin.com,www.najmulmostafaamin.com
 
 # Database
 DB_ENGINE=django.db.backends.postgresql
 DB_NAME=election_prod_db
 DB_USER=election_prod_user
-DB_PASSWORD=<strong-password>
+DB_PASSWORD=STRONG-PASSWORD-HERE
 DB_HOST=db
 DB_PORT=5432
 
@@ -105,10 +135,32 @@ TIME_ZONE=Asia/Dhaka
 
 **Generate SECRET_KEY:**
 ```bash
-python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+python3 -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 ```
 
-### 3. Deploy
+### 4. SSL Certificate Setup (Let's Encrypt)
+
+```bash
+# Create certbot directories
+mkdir -p certbot/conf certbot/www
+
+# Start nginx temporarily (without SSL)
+docker-compose -f docker-compose.prod.yml up -d nginx
+
+# Get SSL certificate
+docker-compose -f docker-compose.prod.yml run --rm certbot certonly --webroot \
+  --webroot-path=/var/www/certbot \
+  --email your-email@example.com \
+  --agree-tos \
+  --no-eff-email \
+  -d najmulmostafaamin.com \
+  -d www.najmulmostafaamin.com
+
+# Stop nginx
+docker-compose -f docker-compose.prod.yml down
+```
+
+### 5. Deploy Application
 
 **Option 1: Quick Deploy Script (Recommended)**
 
@@ -126,11 +178,11 @@ docker-compose -f docker-compose.prod.yml exec web python manage.py createsuperu
 **Option 2: Manual Deployment**
 
 ```bash
-# Build production images
-docker-compose -f docker-compose.prod.yml build
+# Build and start all services
+docker-compose -f docker-compose.prod.yml up -d --build
 
-# Start services
-docker-compose -f docker-compose.prod.yml up -d
+# Wait for database to be ready (about 10 seconds)
+sleep 10
 
 # Run migrations
 docker-compose -f docker-compose.prod.yml exec web python manage.py migrate
@@ -142,18 +194,60 @@ docker-compose -f docker-compose.prod.yml exec web python manage.py createsuperu
 docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --noinput
 ```
 
-### 4. Verify Deployment
+### 6. Firewall Configuration
 
-- **Website**: http://your-server-ip
-- **Admin**: http://your-server-ip/admin
-- **Health Check**: http://your-server-ip/health/
+```bash
+# Install UFW if not installed
+sudo apt install ufw -y
+
+# Allow SSH (important - don't lock yourself out!)
+sudo ufw allow 22/tcp
+
+# Allow HTTP and HTTPS
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+
+# Enable firewall
+sudo ufw enable
+
+# Check status
+sudo ufw status
+```
+
+### 7. Verify Deployment
+
+- **Website**: https://najmulmostafaamin.com
+- **Admin**: https://najmulmostafaamin.com/admin
+- **Health Check**: https://najmulmostafaamin.com/health/
+
+```bash
+# Check all containers are running
+docker-compose -f docker-compose.prod.yml ps
+
+# Check logs
+docker-compose -f docker-compose.prod.yml logs -f
+
+# Test HTTPS redirect
+curl -I http://najmulmostafaamin.com
+# Should return: HTTP/1.1 301 Moved Permanently
+```
+
+### 8. SSL Certificate Auto-Renewal
+
+The certbot container automatically renews certificates every 12 hours. To manually renew:
+
+```bash
+docker-compose -f docker-compose.prod.yml exec certbot certbot renew
+docker-compose -f docker-compose.prod.yml restart nginx
+```
 
 ### Production Architecture
 
-- **Nginx**: Reverse proxy, static file serving (port 80/443)
+- **Nginx**: Reverse proxy, SSL termination, static file serving (ports 80/443)
+- **Certbot**: SSL certificate management (Let's Encrypt)
 - **Gunicorn**: WSGI server (3 workers, 2 threads)
 - **PostgreSQL**: Database (internal network only)
-- **Volumes**: Persistent storage for database, static files, media, logs
+- **Volumes**: Persistent storage for database, static files, media, logs, SSL certificates
 
 ## 🔄 Database Migration (SQLite to PostgreSQL)
 
