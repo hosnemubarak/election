@@ -141,14 +141,39 @@ python3 -c "from django.core.management.utils import get_random_secret_key; prin
 ### 4. SSL Certificate Setup (Let's Encrypt)
 
 ```bash
+# Stop all containers
+docker compose -f docker-compose.prod.yml down
+
+# Create certbot directories
+mkdir -p certbot/conf certbot/www
+
+# Run certbot standalone (port 80 must be free)
+docker run -it --rm \
+  -v $(pwd)/certbot/conf:/etc/letsencrypt \
+  -v $(pwd)/certbot/www:/var/www/certbot \
+  -p 80:80 \
+  certbot/certbot certonly \
+  --standalone \
+  -d najmulmostafaamin.com \
+  -d www.najmulmostafaamin.com \
+  --email your-email@example.com \
+  --agree-tos \
+  --no-eff-email
+
+# After certificates are obtained, start the full stack
+docker compose -f docker-compose.prod.yml up -d
+
+```
+
+```bash
 # Create certbot directories
 mkdir -p certbot/conf certbot/www
 
 # Start nginx temporarily (without SSL)
-docker-compose -f docker-compose.prod.yml up -d nginx
+docker compose -f docker-compose.prod.yml up -d nginx
 
 # Get SSL certificate
-docker-compose -f docker-compose.prod.yml run --rm certbot certonly --webroot \
+docker compose -f docker-compose.prod.yml run --rm certbot certonly --webroot \
   --webroot-path=/var/www/certbot \
   --email your-email@example.com \
   --agree-tos \
@@ -474,13 +499,13 @@ sudo docker-compose up -d
 
 ```bash
 # Collect static files
-docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --noinput
+docker compose -f docker-compose.prod.yml exec web python manage.py collectstatic --noinput
 
 # Check Nginx logs
-docker-compose -f docker-compose.prod.yml logs nginx
+docker compose -f docker-compose.prod.yml logs nginx
 
 # Verify volume mounting
-docker-compose -f docker-compose.prod.yml exec nginx ls -la /app/staticfiles
+docker compose -f docker-compose.prod.yml exec nginx ls -la /app/staticfiles
 ```
 
 ### Container Keeps Restarting
