@@ -19,6 +19,21 @@ services:
     networks:
       - election_network
 
+  redis:
+    image: redis:7-alpine
+    container_name: election_redis_prod
+    command: redis-server --maxmemory 512mb --maxmemory-policy allkeys-lru --save 60 1000
+    volumes:
+      - redis_data_prod:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - election_network
+
   web:
     build:
       context: .
@@ -43,6 +58,8 @@ services:
       - DB_PORT=5432
     depends_on:
       db:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     restart: unless-stopped
     networks:
@@ -78,6 +95,7 @@ services:
 
 volumes:
   postgres_data_prod:
+  redis_data_prod:
   static_volume_prod:
   media_volume_prod:
   logs_volume_prod:

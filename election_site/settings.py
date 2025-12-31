@@ -148,6 +148,38 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# Cache Configuration
+# Redis cache backend for high-performance caching
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': env('REDIS_URL', default='redis://redis:6379/1'),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            'PARSER_CLASS': 'redis.connection.HiredisParser',
+            'CONNECTION_POOL_KWARGS': {
+                'max_connections': 50,
+                'retry_on_timeout': True,
+            },
+            'SOCKET_CONNECT_TIMEOUT': 5,
+            'SOCKET_TIMEOUT': 5,
+            'COMPRESSOR': 'django_redis.compressors.zlib.ZlibCompressor',
+            'IGNORE_EXCEPTIONS': True,  # Fail gracefully if Redis is down
+        },
+        'KEY_PREFIX': 'election',
+        'TIMEOUT': 300,  # Default cache timeout: 5 minutes
+    }
+}
+
+# Cache timeout settings (in seconds)
+CACHE_MIDDLEWARE_SECONDS = 300  # 5 minutes for page cache
+CACHE_MIDDLEWARE_KEY_PREFIX = 'election'
+
+# Session cache (use Redis for sessions in production)
+if not DEBUG:
+    SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+    SESSION_CACHE_ALIAS = 'default'
+
 # Create logs directory if it doesn't exist
 import os
 LOGS_DIR = BASE_DIR / 'logs'

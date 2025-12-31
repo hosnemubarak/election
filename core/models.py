@@ -1,5 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
+from django.core.cache import cache
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 import re
 
 def custom_slugify(value):
@@ -121,3 +124,36 @@ class ContactMessage(models.Model):
     
     def __str__(self):
         return f"{self.name} - {self.department} ({self.created_at.strftime('%d %b %Y')})"
+
+
+# Cache invalidation signals
+@receiver([post_save, post_delete], sender=Event)
+def invalidate_event_cache(sender, instance, **kwargs):
+    """Clear event-related caches when an event is created, updated, or deleted"""
+    cache.delete_many([
+        'views.decorators.cache.cache_page.*.home.*',
+        'views.decorators.cache.cache_page.*.events.*',
+        'views.decorators.cache.cache_page.*.media.*',
+        f'views.decorators.cache.cache_page.*.event_detail.{instance.slug}.*',
+    ])
+    # Clear all event-related cache keys
+    cache.delete_pattern('election:*:home:*')
+    cache.delete_pattern('election:*:events:*')
+    cache.delete_pattern('election:*:media:*')
+    cache.delete_pattern(f'election:*:event_detail:{instance.slug}:*')
+
+
+@receiver([post_save, post_delete], sender=PressRelease)
+def invalidate_press_cache(sender, instance, **kwargs):
+    """Clear press release-related caches when a press release is created, updated, or deleted"""
+    cache.delete_pattern('election:*:media:*')
+    cache.delete_pattern('election:*:press_releases:*')
+    cache.delete_pattern(f'election:*:press_release_detail:{instance.slug}:*')
+
+
+@receiver([post_save, post_delete], sender=Video)
+def invalidate_video_cache(sender, instance, **kwargs):
+    """Clear video-related caches when a video is created, updated, or deleted"""
+    cache.delete_pattern('election:*:media:*')
+    cache.delete_pattern('election:*:videos:*')
+    cache.delete_pattern(f'election:*:video_detail:{instance.slug}:*')
