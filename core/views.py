@@ -1,74 +1,54 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-from django.views.decorators.cache import cache_page
-from django.views.decorators.vary import vary_on_headers
 from .models import Event, PressRelease, Video
 from .forms import ContactForm
 
-# Cache timeout constants (in seconds)
-CACHE_TIMEOUT_SHORT = 300      # 5 minutes - for frequently updated content
-CACHE_TIMEOUT_MEDIUM = 900     # 15 minutes - for moderately updated content
-CACHE_TIMEOUT_LONG = 3600      # 1 hour - for rarely updated content
-
-@cache_page(CACHE_TIMEOUT_SHORT)
 def home(request):
-    """Home page with latest 3 events - cached for 5 minutes"""
+    """Home page with latest 3 events"""
     events = Event.objects.all()[:3]
     return render(request, 'home.html', {'events': events})
 
-@cache_page(CACHE_TIMEOUT_MEDIUM)
 def events(request):
-    """Events listing page - cached for 15 minutes"""
+    """Events listing page"""
     events = Event.objects.all()
     return render(request, 'events.html', {'events': events})
 
-@cache_page(CACHE_TIMEOUT_LONG)
-@vary_on_headers('User-Agent')
 def event_detail(request, slug):
-    """Individual event detail page - cached for 1 hour"""
+    """Individual event detail page"""
     event = get_object_or_404(Event, slug=slug)
     return render(request, 'event_detail.html', {'event': event})
 
-@cache_page(CACHE_TIMEOUT_LONG)
 def about(request):
-    """About page - static content, cached for 1 hour"""
+    """About page"""
     return render(request, 'about.html')
 
-@cache_page(CACHE_TIMEOUT_LONG)
 def manifesto(request):
-    """Manifesto page - static content, cached for 1 hour"""
+    """Manifesto page"""
     return render(request, 'manifesto.html')
 
-@cache_page(CACHE_TIMEOUT_SHORT)
 def news_media(request):
-    """News media page with latest press releases and videos - cached for 5 minutes"""
+    """News media page with latest press releases and videos"""
     press_releases = PressRelease.objects.all()[:3]
     videos = Video.objects.all()[:3]
     return render(request, 'news_media.html', {'press_releases': press_releases, 'videos': videos})
 
-@cache_page(CACHE_TIMEOUT_MEDIUM)
 def press_releases(request):
-    """Press releases listing page - cached for 15 minutes"""
+    """Press releases listing page"""
     press_releases = PressRelease.objects.all()
     return render(request, 'press_releases.html', {'press_releases': press_releases})
 
-@cache_page(CACHE_TIMEOUT_LONG)
-@vary_on_headers('User-Agent')
 def press_release_detail(request, slug):
-    """Individual press release detail page - cached for 1 hour"""
+    """Individual press release detail page"""
     press = get_object_or_404(PressRelease, slug=slug)
     return render(request, 'press_release_detail.html', {'press': press})
 
-@cache_page(CACHE_TIMEOUT_MEDIUM)
 def videos(request):
-    """Videos listing page - cached for 15 minutes"""
+    """Videos listing page"""
     videos = Video.objects.all()
     return render(request, 'videos.html', {'videos': videos})
 
-@cache_page(CACHE_TIMEOUT_LONG)
-@vary_on_headers('User-Agent')
 def video_detail(request, slug):
-    """Individual video detail page - cached for 1 hour"""
+    """Individual video detail page"""
     video = get_object_or_404(Video, slug=slug)
     return render(request, 'video_detail.html', {'video': video})
 
