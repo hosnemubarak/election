@@ -24,8 +24,8 @@ class VideoAdmin(admin.ModelAdmin):
 
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'department', 'created_at', 'is_read')
-    list_filter = ('department', 'is_read', 'created_at')
+    list_display = ('name', 'email', 'upazila', 'union', 'department', 'created_at', 'is_read')
+    list_filter = ('upazila', 'union', 'department', 'is_read', 'created_at')
     search_fields = ('name', 'email', 'message')
     readonly_fields = ('created_at',)
     list_editable = ('is_read',)
