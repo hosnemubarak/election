@@ -4,9 +4,15 @@ from .models import Event, PressRelease, Video
 from .forms import ContactForm
 
 def home(request):
-    """Home page with latest 3 events"""
+    """Home page with latest 3 events, 6 videos, and 3 press releases"""
     events = Event.objects.all()[:3]
-    return render(request, 'home.html', {'events': events})
+    videos = Video.objects.all()[:6]
+    press_releases = PressRelease.objects.all()[:3]
+    return render(request, 'home.html', {
+        'events': events,
+        'videos': videos,
+        'press_releases': press_releases
+    })
 
 def events(request):
     """Events listing page"""

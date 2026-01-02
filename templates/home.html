@@ -126,8 +126,6 @@
     </div>
 </section>
 
-
-
 <!-- Join Us Carousel / Events -->
 <section class="section-padding">
     <div class="container text-center">
@@ -140,6 +138,54 @@
             {% for event in events %}
             {% include 'includes/event_card.html' %}
             {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Video Section -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="mb-3">
+                <i class="far fa-play-circle text-secondary"></i>
+                <span class="text-secondary fw-bold ms-2">গুরুত্বপূর্ণ মুহূর্তগুলো দেখুন</span>
+            </div>
+            <h2 class="display-4 text-secondary">ভিডিও এবং সাক্ষাৎকার</h2>
+            <p class="text-muted">আমাদের ক্যাম্পেইনের সাক্ষাৎকার ও গুরুত্বপূর্ণ মুহূর্তগুলো দেখুন।</p>
+        </div>
+
+        <div class="row g-4">
+            {% for video in videos %}
+            {% include 'includes/video_card.html' %}
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="{% url 'videos' %}" class="btn btn-outline-primary"><i class="fas fa-arrow-right me-2"></i>সকল ভিডিও দেখুন</a>
+        </div>
+    </div>
+</section>
+
+<!-- Press Releases Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="mb-3">
+                <i class="fas fa-newspaper text-secondary"></i>
+                <span class="text-secondary fw-bold ms-2">সংযুক্ত থাকুন</span>
+            </div>
+            <h2 class="display-4 text-secondary">প্রেস রিলিজ</h2>
+            <p class="text-muted">জনগণের সঙ্গে সংযোগের সর্বশেষ ঘোষণা ও আনুষ্ঠানিক বিবৃতি</p>
+        </div>
+
+        <div class="row g-4">
+            {% for press in press_releases %}
+            {% include 'includes/press_card.html' %}
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="{% url 'press_releases' %}" class="btn btn-outline-primary"><i class="fas fa-arrow-right me-2"></i>সকল প্রেস রিলিজ দেখুন</a>
         </div>
     </div>
 </section>
