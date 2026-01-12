@@ -1,16 +1,7 @@
 from django import forms
-from captcha.fields import CaptchaField
-from .models import ContactMessage
+from .models import ContactMessage, Comment
 
 class ContactForm(forms.ModelForm):
-    captcha = CaptchaField(
-        label='যাচাইকরণ কোড',
-        help_text='উপরের ছবিতে দেখানো অক্ষরগুলি লিখুন',
-        error_messages={
-            'invalid': 'যাচাইকরণ কোড সঠিক নয়। অনুগ্রহ করে আবার চেষ্টা করুন।',
-            'required': 'যাচাইকরণ কোড প্রয়োজন।'
-        }
-    )
     
     class Meta:
         model = ContactMessage
@@ -43,4 +34,43 @@ class ContactForm(forms.ModelForm):
             'phone': 'ফোন নম্বর',
             'department': 'বিভাগ',
             'message': 'বার্তা',
+        }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['name', 'email', 'subject', 'category', 'rating', 'message']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'আপনার পূর্ণ নাম লিখুন'
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'ইমেইল ঠিকানা'
+            }),
+            'subject': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'বিষয় (ঐচ্ছিক)'
+            }),
+            'category': forms.Select(attrs={
+                'class': 'form-select'
+            }),
+            'rating': forms.Select(attrs={
+                'class': 'form-select'
+            }),
+            'message': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 5,
+                'placeholder': 'আপনার মতামত বিস্তারিত লিখুন...'
+            }),
+        }
+        labels = {
+            'name': 'আপনার নাম',
+            'email': 'ইমেইল',
+            'subject': 'বিষয়',
+            'category': 'মতামতের ধরন',
+            'rating': 'মূল্যায়ন (ঐচ্ছিক)',
+            'message': 'আপনার মতামত',
         }

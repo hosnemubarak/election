@@ -121,3 +121,40 @@ class ContactMessage(models.Model):
     
     def __str__(self):
         return f"{self.name} - {self.department} ({self.created_at.strftime('%d %b %Y')})"
+
+
+class Comment(models.Model):
+    CATEGORY_CHOICES = [
+        ('general', 'সাধারণ মতামত'),
+        ('policy', 'নীতি ও ইশতেহার'),
+        ('campaign', 'প্রচারণা'),
+        ('suggestion', 'পরামর্শ'),
+        ('complaint', 'অভিযোগ'),
+        ('appreciation', 'প্রশংসা'),
+    ]
+    
+    RATING_CHOICES = [
+        (5, 'অসাধারণ'),
+        (4, 'ভালো'),
+        (3, 'মাঝারি'),
+        (2, 'উন্নতি প্রয়োজন'),
+        (1, 'খারাপ'),
+    ]
+    
+    name = models.CharField(max_length=200, verbose_name='নাম')
+    email = models.EmailField(verbose_name='ইমেইল')
+    subject = models.CharField(max_length=200, verbose_name='বিষয়', blank=True)
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, verbose_name='ধরন')
+    rating = models.IntegerField(choices=RATING_CHOICES, verbose_name='মূল্যায়ন', null=True, blank=True)
+    message = models.TextField(verbose_name='মতামত')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='প্রেরণের সময়')
+    is_read = models.BooleanField(default=False, verbose_name='পড়া হয়েছে')
+    is_published = models.BooleanField(default=False, verbose_name='প্রকাশিত')
+    
+    class Meta:
+        verbose_name = 'মতামত'
+        verbose_name_plural = 'মতামতসমূহ'
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.name} - {self.category} ({self.created_at.strftime('%d %b %Y')})"

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Event, PressRelease, Video, ContactMessage
+from .models import Event, PressRelease, Video, ContactMessage, Comment
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
@@ -29,5 +29,14 @@ class ContactMessageAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email', 'message')
     readonly_fields = ('created_at',)
     list_editable = ('is_read',)
+    date_hierarchy = 'created_at'
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'category', 'rating', 'created_at', 'is_read', 'is_published')
+    list_filter = ('category', 'rating', 'is_read', 'is_published', 'created_at')
+    search_fields = ('name', 'email', 'subject', 'message')
+    readonly_fields = ('created_at',)
+    list_editable = ('is_read', 'is_published')
     date_hierarchy = 'created_at'
 

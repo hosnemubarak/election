@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from .models import Event, PressRelease, Video
-from .forms import ContactForm
+from .forms import ContactForm, CommentForm
 
 def home(request):
     """Home page with latest 3 events, 6 videos, and 3 press releases"""
@@ -72,6 +72,22 @@ def contact(request):
         form = ContactForm()
     
     return render(request, 'contact.html', {'form': form})
+
+
+def comments(request):
+    """Comments/Feedback page for user opinions"""
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'আপনার মতামত সফলভাবে জমা হয়েছে। আপনার মূল্যবান মতামতের জন্য ধন্যবাদ।')
+            return redirect('comments')
+        else:
+            messages.error(request, 'ফর্মটি পূরণ করতে সমস্যা হয়েছে। অনুগ্রহ করে সকল ক্ষেত্র সঠিকভাবে পূরণ করুন।')
+    else:
+        form = CommentForm()
+    
+    return render(request, 'comments.html', {'form': form})
 
 # Custom error handlers
 def custom_404(request, exception):

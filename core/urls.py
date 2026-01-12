@@ -13,6 +13,7 @@ urlpatterns = [
     path('manifesto/', views.manifesto, name='manifesto'),
     path('news-media/', views.news_media, name='news_media'),
     path('contact/', views.contact, name='contact'),
+    path('comments/', views.comments, name='comments'),
     path('captcha/', include('captcha.urls')),
 ]
 

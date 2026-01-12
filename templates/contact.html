@@ -165,15 +165,6 @@
                             {% endif %}
                         </div>
 
-                        <div class="mb-3">
-                            {{ form.captcha.label_tag }}
-                            {{ form.captcha }}
-                            {% if form.captcha.errors %}
-                            <div class="text-danger small">{{ form.captcha.errors }}</div>
-                            {% endif %}
-                            <small class="text-muted">{{ form.captcha.help_text }}</small>
-                        </div>
-
                         <button type="submit" class="btn btn-secondary w-100">
                             <i class="fab fa-telegram-plane me-2"></i> বার্তা পাঠান
                         </button>
