@@ -188,8 +188,15 @@ class Comment(models.Model):
         (1, 'খারাপ'),
     ]
     
+    # Reuse the same choices from ContactMessage
+    UPAZILA_CHOICES = ContactMessage.UPAZILA_CHOICES
+    UNION_CHOICES = ContactMessage.UNION_CHOICES
+    UPAZILA_UNION_MAP = ContactMessage.UPAZILA_UNION_MAP
+    
     name = models.CharField(max_length=200, verbose_name='নাম')
     email = models.EmailField(verbose_name='ইমেইল')
+    upazila = models.CharField(max_length=50, choices=UPAZILA_CHOICES, verbose_name='উপজেলা', blank=True, default='')
+    union = models.CharField(max_length=50, choices=UNION_CHOICES, verbose_name='ইউনিয়ন/পৌরসভা', blank=True, default='')
     subject = models.CharField(max_length=200, verbose_name='বিষয়', blank=True)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, verbose_name='ধরন')
     rating = models.IntegerField(choices=RATING_CHOICES, verbose_name='মূল্যায়ন', null=True, blank=True)
@@ -204,4 +211,13 @@ class Comment(models.Model):
         ordering = ['-created_at']
     
     def __str__(self):
-        return f"{self.name} - {self.category} ({self.created_at.strftime('%d %b %Y')})"
+        return f"{self.name} - {self.upazila} - {self.union} ({self.created_at.strftime('%d %b %Y')})"
+    
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        if self.upazila and self.union:
+            valid_unions = self.UPAZILA_UNION_MAP.get(self.upazila, [])
+            if self.union not in valid_unions:
+                raise ValidationError({
+                    'union': f'নির্বাচিত ইউনিয়ন/পৌরসভা এই উপজেলার জন্য বৈধ নয়।'
+                })

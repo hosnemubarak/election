@@ -64,7 +64,7 @@ class ContactForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['name', 'email', 'subject', 'category', 'rating', 'message']
+        fields = ['name', 'email', 'upazila', 'union', 'subject', 'category', 'rating', 'message']
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -73,6 +73,14 @@ class CommentForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'ইমেইল ঠিকানা'
+            }),
+            'upazila': forms.Select(attrs={
+                'class': 'form-select',
+                'id': 'id_comment_upazila'
+            }),
+            'union': forms.Select(attrs={
+                'class': 'form-select',
+                'id': 'id_comment_union'
             }),
             'subject': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -93,8 +101,24 @@ class CommentForm(forms.ModelForm):
         labels = {
             'name': 'আপনার নাম',
             'email': 'ইমেইল',
+            'upazila': 'উপজেলা',
+            'union': 'ইউনিয়ন/পৌরসভা',
             'subject': 'বিষয়',
             'category': 'মতামতের ধরন',
             'rating': 'মূল্যায়ন (ঐচ্ছিক)',
             'message': 'আপনার মতামত',
         }
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        upazila = cleaned_data.get('upazila')
+        union = cleaned_data.get('union')
+        
+        if upazila and union:
+            valid_unions = Comment.UPAZILA_UNION_MAP.get(upazila, [])
+            if union not in valid_unions:
+                raise forms.ValidationError({
+                    'union': 'নির্বাচিত ইউনিয়ন/পৌরসভা এই উপজেলার জন্য বৈধ নয়। অনুগ্রহ করে সঠিক ইউনিয়ন/পৌরসভা নির্বাচন করুন।'
+                })
+        
+        return cleaned_data
