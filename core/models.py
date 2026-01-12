@@ -106,9 +106,47 @@ class ContactMessage(models.Model):
         ('other', 'অন্যান্য'),
     ]
     
+    UPAZILA_CHOICES = [
+        ('lohagara', 'লোহাগাড়া'),
+        ('satkania', 'সাতকানিয়া'),
+    ]
+    
+    UNION_CHOICES = [
+        ('lohagara_union', 'লোহাগাড়া ইউনিয়ন'),
+        ('padua', 'পদুয়া'),
+        ('barahatia', 'বড়হাতিয়া'),
+        ('amirabad', 'আমিরাবাদ'),
+        ('adhunagar', 'আধুনগর'),
+        ('chunati', 'চুনতি'),
+        ('charamba', 'চরাম্বা'),
+        ('putibila', 'পুটিবিলা'),
+        ('kalauzan', 'কালাউজান'),
+        ('satkania_pourashava', 'সাতকানিয়া পৌরসভা'),
+        ('satkania_union', 'সাতকানিয়া ইউনিয়ন'),
+        ('dhemsha', 'ঢেমশা'),
+        ('bazalia', 'বাজালিয়া'),
+        ('kanchana', 'কাঞ্চনা'),
+        ('keochia', 'কেঁওচিয়া'),
+        ('madarsha', 'মাদার্শা'),
+        ('purba_guchchagram', 'পূর্ব গুচ্ছগ্রাম'),
+    ]
+    
+    UPAZILA_UNION_MAP = {
+        'lohagara': [
+            'lohagara_union', 'padua', 'barahatia', 'amirabad', 
+            'adhunagar', 'chunati', 'charamba', 'putibila', 'kalauzan'
+        ],
+        'satkania': [
+            'satkania_pourashava', 'satkania_union', 'dhemsha', 'bazalia',
+            'kanchana', 'keochia', 'madarsha', 'purba_guchchagram'
+        ]
+    }
+    
     name = models.CharField(max_length=200, verbose_name='নাম')
     email = models.EmailField(verbose_name='ইমেইল')
     phone = models.CharField(max_length=20, verbose_name='ফোন নম্বর')
+    upazila = models.CharField(max_length=50, choices=UPAZILA_CHOICES, verbose_name='উপজেলা')
+    union = models.CharField(max_length=50, choices=UNION_CHOICES, verbose_name='ইউনিয়ন/পৌরসভা')
     department = models.CharField(max_length=50, choices=DEPARTMENT_CHOICES, verbose_name='বিভাগ')
     message = models.TextField(verbose_name='বার্তা')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='প্রেরণের সময়')
@@ -120,7 +158,16 @@ class ContactMessage(models.Model):
         ordering = ['-created_at']
     
     def __str__(self):
-        return f"{self.name} - {self.department} ({self.created_at.strftime('%d %b %Y')})"
+        return f"{self.name} - {self.upazila} - {self.union} ({self.created_at.strftime('%d %b %Y')})"
+    
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        if self.upazila and self.union:
+            valid_unions = self.UPAZILA_UNION_MAP.get(self.upazila, [])
+            if self.union not in valid_unions:
+                raise ValidationError({
+                    'union': f'নির্বাচিত ইউনিয়ন/পৌরসভা এই উপজেলার জন্য বৈধ নয়।'
+                })
 
 
 class Comment(models.Model):

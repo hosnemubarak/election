@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}যোগাযোগ - Nazmul Mostafa Amin{% endblock %}
+{% block title %}যোগাযোগ ও মতামত - Nazmul Mostafa Amin{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -29,7 +29,7 @@
     <div class="container text-center">
         <div class="mb-4">
             <span class="badge bg-light text-secondary px-3 py-2 rounded-pill border border-secondary">
-                <i class="far fa-star me-2"></i>যোগাযোগ
+                <i class="far fa-star me-2"></i>যোগাযোগ ও মতামত
             </span>
         </div>
         <h1 class="display-4 mb-4">যোগাযোগ করুন</h1>
@@ -150,6 +150,22 @@
                         </div>
 
                         <div class="mb-3">
+                            {{ form.upazila.label_tag }}
+                            {{ form.upazila }}
+                            {% if form.upazila.errors %}
+                            <div class="text-danger small">{{ form.upazila.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.union.label_tag }}
+                            {{ form.union }}
+                            {% if form.union.errors %}
+                            <div class="text-danger small">{{ form.union.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
                             {{ form.department.label_tag }}
                             {{ form.department }}
                             {% if form.department.errors %}
@@ -261,4 +277,75 @@
         </div>
     </div>
 </section>
+
+<script>
+// Upazila-Union dependency mapping
+const upazilaUnionMap = {
+    'lohagara': [
+        {value: 'lohagara_union', text: 'লোহাগাড়া ইউনিয়ন'},
+        {value: 'padua', text: 'পদুয়া'},
+        {value: 'barahatia', text: 'বড়হাতিয়া'},
+        {value: 'amirabad', text: 'আমিরাবাদ'},
+        {value: 'adhunagar', text: 'আধুনগর'},
+        {value: 'chunati', text: 'চুনতি'},
+        {value: 'charamba', text: 'চরাম্বা'},
+        {value: 'putibila', text: 'পুটিবিলা'},
+        {value: 'kalauzan', text: 'কালাউজান'}
+    ],
+    'satkania': [
+        {value: 'satkania_pourashava', text: 'সাতকানিয়া পৌরসভা'},
+        {value: 'satkania_union', text: 'সাতকানিয়া ইউনিয়ন'},
+        {value: 'dhemsha', text: 'ঢেমশা'},
+        {value: 'bazalia', text: 'বাজালিয়া'},
+        {value: 'kanchana', text: 'কাঞ্চনা'},
+        {value: 'keochia', text: 'কেঁওচিয়া'},
+        {value: 'madarsha', text: 'মাদার্শা'},
+        {value: 'purba_guchchagram', text: 'পূর্ব গুচ্ছগ্রাম'}
+    ]
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+    const upazilaSelect = document.getElementById('id_upazila');
+    const unionSelect = document.getElementById('id_union');
+    
+    if (!upazilaSelect || !unionSelect) return;
+    
+    function updateUnionOptions() {
+        const selectedUpazila = upazilaSelect.value;
+        const currentUnion = unionSelect.value;
+        
+        // Clear existing options
+        unionSelect.innerHTML = '<option value="">---------</option>';
+        
+        if (selectedUpazila && upazilaUnionMap[selectedUpazila]) {
+            const unions = upazilaUnionMap[selectedUpazila];
+            
+            unions.forEach(function(union) {
+                const option = document.createElement('option');
+                option.value = union.value;
+                option.textContent = union.text;
+                
+                // Preserve selection if valid
+                if (union.value === currentUnion) {
+                    option.selected = true;
+                }
+                
+                unionSelect.appendChild(option);
+            });
+            
+            unionSelect.disabled = false;
+        } else {
+            unionSelect.disabled = true;
+        }
+    }
+    
+    // Initialize on page load
+    updateUnionOptions();
+    
+    // Update when upazila changes
+    upazilaSelect.addEventListener('change', function() {
+        updateUnionOptions();
+    });
+});
+</script>
 {% endblock %}

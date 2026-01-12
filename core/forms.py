@@ -5,7 +5,7 @@ class ContactForm(forms.ModelForm):
     
     class Meta:
         model = ContactMessage
-        fields = ['name', 'email', 'phone', 'department', 'message']
+        fields = ['name', 'email', 'phone', 'upazila', 'union', 'department', 'message']
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -18,6 +18,14 @@ class ContactForm(forms.ModelForm):
             'phone': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': '+880 123 45677'
+            }),
+            'upazila': forms.Select(attrs={
+                'class': 'form-select',
+                'id': 'id_upazila'
+            }),
+            'union': forms.Select(attrs={
+                'class': 'form-select',
+                'id': 'id_union'
             }),
             'department': forms.Select(attrs={
                 'class': 'form-select'
@@ -32,9 +40,25 @@ class ContactForm(forms.ModelForm):
             'name': 'আপনার নাম',
             'email': 'ইমেইল',
             'phone': 'ফোন নম্বর',
+            'upazila': 'উপজেলা',
+            'union': 'ইউনিয়ন/পৌরসভা',
             'department': 'বিভাগ',
             'message': 'বার্তা',
         }
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        upazila = cleaned_data.get('upazila')
+        union = cleaned_data.get('union')
+        
+        if upazila and union:
+            valid_unions = ContactMessage.UPAZILA_UNION_MAP.get(upazila, [])
+            if union not in valid_unions:
+                raise forms.ValidationError({
+                    'union': 'নির্বাচিত ইউনিয়ন/পৌরসভা এই উপজেলার জন্য বৈধ নয়। অনুগ্রহ করে সঠিক ইউনিয়ন/পৌরসভা নির্বাচন করুন।'
+                })
+        
+        return cleaned_data
 
 
 class CommentForm(forms.ModelForm):
