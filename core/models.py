@@ -112,35 +112,72 @@ class ContactMessage(models.Model):
     ]
     
     UNION_CHOICES = [
+        # -------- Lohagara --------
         ('lohagara_union', 'লোহাগাড়া ইউনিয়ন'),
         ('padua', 'পদুয়া'),
         ('barahatia', 'বড়হাতিয়া'),
         ('amirabad', 'আমিরাবাদ'),
         ('adhunagar', 'আধুনগর'),
         ('chunati', 'চুনতি'),
-        ('charamba', 'চরাম্বা'),
+        ('charamba', 'চরম্বা'),
         ('putibila', 'পুটিবিলা'),
-        ('kalauzan', 'কালাউজান'),
+        ('kalauzan', 'কলাউজান'),
+
+        # -------- Satkania (All Unions) --------
+        ('charti', '১নং চরতী'),
+        ('khagria', '২নং খাগরিয়া'),
+        ('nalua', '৩নং নলুয়া'),
+        ('kanchana', '৪নং কাঞ্চনা'),
+        ('amilais', '৫নং আমিলাইষ'),
+        ('eochia', '৬নং এওচিয়া'),
+        ('madarsha', '৭নং মাদার্শা'),
+        ('dhemsha', '৮নং ঢেমশা'),
+        ('paschim_dhemsha', '৯নং পশ্চিম ঢেমশা'),
+        ('keochia', '১০নং কেঁওচিয়া'),
+        ('kaliaish', '১১নং কালিয়াইশ'),
+        ('dharmapur', '১২নং ধর্মপুর'),
+        ('bazalia', '১৩নং বাজালিয়া'),
+        ('purangar', '১৪নং পুরানগড়'),
+        ('chadaha', '১৫নং ছদাহা'),
+        ('satkania_union', '১৬নং সাতকানিয়া'),
+        ('sonakania', '১৭নং সোনাকানিয়া'),
+        # -------- Satkania Pourashava --------
         ('satkania_pourashava', 'সাতকানিয়া পৌরসভা'),
-        ('satkania_union', 'সাতকানিয়া ইউনিয়ন'),
-        ('dhemsha', 'ঢেমশা'),
-        ('bazalia', 'বাজালিয়া'),
-        ('kanchana', 'কাঞ্চনা'),
-        ('keochia', 'কেঁওচিয়া'),
-        ('madarsha', 'মাদার্শা'),
-        ('purba_guchchagram', 'পূর্ব গুচ্ছগ্রাম'),
-    ]
-    
+        ]
+
     UPAZILA_UNION_MAP = {
         'lohagara': [
-            'lohagara_union', 'padua', 'barahatia', 'amirabad', 
-            'adhunagar', 'chunati', 'charamba', 'putibila', 'kalauzan'
+            'lohagara_union',
+            'padua',
+            'barahatia',
+            'amirabad',
+            'adhunagar',
+            'chunati',
+            'charamba',
+            'putibila',
+            'kalauzan',
         ],
         'satkania': [
-            'satkania_pourashava', 'satkania_union', 'dhemsha', 'bazalia',
-            'kanchana', 'keochia', 'madarsha', 'purba_guchchagram'
-        ]
-    }
+                'charti',
+                'khagria',
+                'nalua',
+                'kanchana',
+                'amilais',
+                'eochia',
+                'madarsha',
+                'dhemsha',
+                'paschim_dhemsha',
+                'keochia',
+                'kaliaish',
+                'dharmapur',
+                'bazalia',
+                'purangar',
+                'chadaha',
+                'satkania_union',
+                'sonakania',
+                'satkania_pourashava',
+            ]
+        }
     
     name = models.CharField(max_length=200, verbose_name='নাম')
     email = models.EmailField(verbose_name='ইমেইল')
@@ -188,15 +225,7 @@ class Comment(models.Model):
         (1, 'খারাপ'),
     ]
     
-    # Reuse the same choices from ContactMessage
-    UPAZILA_CHOICES = ContactMessage.UPAZILA_CHOICES
-    UNION_CHOICES = ContactMessage.UNION_CHOICES
-    UPAZILA_UNION_MAP = ContactMessage.UPAZILA_UNION_MAP
-    
     name = models.CharField(max_length=200, verbose_name='নাম')
-    email = models.EmailField(verbose_name='ইমেইল')
-    upazila = models.CharField(max_length=50, choices=UPAZILA_CHOICES, verbose_name='উপজেলা', blank=True, default='')
-    union = models.CharField(max_length=50, choices=UNION_CHOICES, verbose_name='ইউনিয়ন/পৌরসভা', blank=True, default='')
     subject = models.CharField(max_length=200, verbose_name='বিষয়', blank=True)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, verbose_name='ধরন')
     rating = models.IntegerField(choices=RATING_CHOICES, verbose_name='মূল্যায়ন', null=True, blank=True)
@@ -211,13 +240,4 @@ class Comment(models.Model):
         ordering = ['-created_at']
     
     def __str__(self):
-        return f"{self.name} - {self.upazila} - {self.union} ({self.created_at.strftime('%d %b %Y')})"
-    
-    def clean(self):
-        from django.core.exceptions import ValidationError
-        if self.upazila and self.union:
-            valid_unions = self.UPAZILA_UNION_MAP.get(self.upazila, [])
-            if self.union not in valid_unions:
-                raise ValidationError({
-                    'union': f'নির্বাচিত ইউনিয়ন/পৌরসভা এই উপজেলার জন্য বৈধ নয়।'
-                })
+        return f"{self.name} - {self.subject or 'No Subject'} ({self.created_at.strftime('%d %b %Y')})"

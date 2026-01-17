@@ -33,9 +33,9 @@ class ContactMessageAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'upazila', 'union', 'category', 'rating', 'created_at', 'is_read', 'is_published')
-    list_filter = ('upazila', 'union', 'category', 'rating', 'is_read', 'is_published', 'created_at')
-    search_fields = ('name', 'email', 'subject', 'message')
+    list_display = ('name', 'subject', 'category', 'rating', 'created_at', 'is_read', 'is_published')
+    list_filter = ('category', 'rating', 'is_read', 'is_published', 'created_at')
+    search_fields = ('name', 'subject', 'message')
     readonly_fields = ('created_at',)
     list_editable = ('is_read', 'is_published')
     date_hierarchy = 'created_at'
