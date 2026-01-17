@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',  # Required for sitemap functionality
+    'import_export',  # Django Import-Export functionality
     'core',
     'captcha',
 ]
