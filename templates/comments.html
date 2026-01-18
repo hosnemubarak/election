@@ -5,6 +5,10 @@
 
 {% block extra_css %}
 <style>
+    html {
+        scroll-behavior: smooth;
+    }
+    
     .comment-card {
         transition: transform 0.3s;
     }
@@ -34,95 +38,19 @@
         </div>
         <h1 class="display-4 mb-4">আপনার মতামত জানান</h1>
         <p class="lead mx-auto" style="max-width: 700px;">আপনার মূল্যবান মতামত আমাদের কাছে অত্যন্ত গুরুত্বপূর্ণ।<br>আপনার পরামর্শ, প্রশংসা বা অভিযোগ — সবকিছুই আমরা মনোযোগ সহকারে শুনতে চাই।</p>
-    </div>
-</section>
-
-<!-- Feedback Categories Info -->
-<section class="py-5">
-    <div class="container">
-        <div class="row g-4">
-
-            <!-- General Feedback -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card comment-card border-0 shadow-sm text-center p-4 h-100"
-                    style="background-color: #f8f9fa;">
-                    <i class="fas fa-comment-alt fa-2x text-secondary mb-3"></i>
-                    <h5 class="fw-bold">সাধারণ মতামত</h5>
-                    <p class="small text-muted mb-0">
-                        যেকোনো বিষয়ে আপনার সাধারণ মতামত বা পরামর্শ শেয়ার করুন
-                    </p>
-                </div>
-            </div>
-
-            <!-- Policy Feedback -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card comment-card border-0 shadow-sm text-center p-4 h-100"
-                    style="background-color: #f8f9fa;">
-                    <i class="fas fa-file-alt fa-2x text-secondary mb-3"></i>
-                    <h5 class="fw-bold">নীতি ও ইশতেহার</h5>
-                    <p class="small text-muted mb-0">
-                        আমাদের নীতি ও ইশতেহার সম্পর্কে আপনার মতামত দিন
-                    </p>
-                </div>
-            </div>
-
-            <!-- Campaign Feedback -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card comment-card border-0 shadow-sm text-center p-4 h-100"
-                    style="background-color: #f8f9fa;">
-                    <i class="fas fa-bullhorn fa-2x text-secondary mb-3"></i>
-                    <h5 class="fw-bold">প্রচারণা</h5>
-                    <p class="small text-muted mb-0">
-                        আমাদের প্রচারণা কার্যক্রম সম্পর্কে আপনার মতামত জানান
-                    </p>
-                </div>
-            </div>
-
-            <!-- Suggestion -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card comment-card border-0 shadow-sm text-center p-4 h-100"
-                    style="background-color: #f8f9fa;">
-                    <i class="fas fa-lightbulb fa-2x text-secondary mb-3"></i>
-                    <h5 class="fw-bold">পরামর্শ</h5>
-                    <p class="small text-muted mb-0">
-                        উন্নতির জন্য আপনার গঠনমূলক পরামর্শ দিন
-                    </p>
-                </div>
-            </div>
-
-            <!-- Complaint -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card comment-card border-0 shadow-sm text-center p-4 h-100"
-                    style="background-color: #f8f9fa;">
-                    <i class="fas fa-exclamation-triangle fa-2x text-secondary mb-3"></i>
-                    <h5 class="fw-bold">অভিযোগ</h5>
-                    <p class="small text-muted mb-0">
-                        কোনো সমস্যা বা অভিযোগ থাকলে আমাদের জানান
-                    </p>
-                </div>
-            </div>
-
-            <!-- Appreciation -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card comment-card border-0 shadow-sm text-center p-4 h-100"
-                    style="background-color: #f8f9fa;">
-                    <i class="fas fa-heart fa-2x text-secondary mb-3"></i>
-                    <h5 class="fw-bold">প্রশংসা</h5>
-                    <p class="small text-muted mb-0">
-                        আমাদের কাজের প্রশংসা করতে চাইলে জানান
-                    </p>
-                </div>
-            </div>
-
+        <div class="mt-4">
+            <a href="#feedback-form" class="btn btn-secondary">
+                <i class="fas fa-arrow-down me-2"></i>মতামত ফর্মে যান
+            </a>
         </div>
     </div>
 </section>
 
 <!-- Feedback Form Section -->
-<section class="py-5 bg-light">
+<section id="feedback-form" class="py-5 bg-light">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-6 mb-4 mb-lg-0">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
                 <div class="mb-4">
                     <span class="badge bg-light text-secondary px-3 py-2 rounded-pill border border-secondary">
                         <i class="fas fa-pen me-2"></i>মতামত লিখুন
@@ -216,74 +144,6 @@
                     </form>
                 </div>
             </div>
-
-            <!-- Why Your Feedback Matters Section -->
-            <div class="col-lg-6">
-                <div class="mb-4">
-                    <span class="badge bg-light text-secondary px-3 py-2 rounded-pill border border-secondary">
-                        <i class="fas fa-info-circle me-2"></i>কেন গুরুত্বপূর্ণ
-                    </span>
-                </div>
-                <h2 class="display-4 mb-3">আপনার মতামত কেন গুরুত্বপূর্ণ</h2>
-                <p class="text-muted mb-4">আপনার প্রতিটি মতামত আমাদের আরও ভালো সেবা দিতে সাহায্য করে।</p>
-
-                <div class="row g-3">
-
-                    <!-- Transparency -->
-                    <div class="col-12">
-                        <div class="card feedback-info-card border-0 shadow-sm p-3">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-eye fa-2x text-secondary me-3"></i>
-                                <div>
-                                    <h6 class="fw-bold mb-1">স্বচ্ছতা</h6>
-                                    <p class="mb-0 text-muted small">আপনার মতামত আমাদের আরও স্বচ্ছ ও জবাবদিহিতামূলক করে তোলে</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Improvement -->
-                    <div class="col-12">
-                        <div class="card feedback-info-card border-0 shadow-sm p-3">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-chart-line fa-2x text-secondary me-3"></i>
-                                <div>
-                                    <h6 class="fw-bold mb-1">উন্নতি</h6>
-                                    <p class="mb-0 text-muted small">আপনার পরামর্শ আমাদের নীতি ও কার্যক্রম উন্নত করতে সাহায্য করে</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Connection -->
-                    <div class="col-12">
-                        <div class="card feedback-info-card border-0 shadow-sm p-3">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-users fa-2x text-secondary me-3"></i>
-                                <div>
-                                    <h6 class="fw-bold mb-1">সংযোগ</h6>
-                                    <p class="mb-0 text-muted small">আপনার মতামত আমাদের জনগণের সাথে আরও ঘনিষ্ঠ সম্পর্ক তৈরি করে</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Accountability -->
-                    <div class="col-12">
-                        <div class="card feedback-info-card border-0 shadow-sm p-3">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-balance-scale fa-2x text-secondary me-3"></i>
-                                <div>
-                                    <h6 class="fw-bold mb-1">জবাবদিহিতা</h6>
-                                    <p class="mb-0 text-muted small">আপনার অভিযোগ আমাদের দায়িত্বশীল ও জবাবদিহিতামূলক রাখে</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
         </div>
     </div>
 </section>
@@ -323,5 +183,17 @@
         </div>
     </div>
 </section>
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if we're not already on the feedback form section
+    if (!window.location.hash) {
+        // Redirect to feedback form section
+        window.location.hash = '#feedback-form';
+    }
+});
+</script>
+{% endblock %}
 
 {% endblock %}
