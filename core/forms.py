@@ -64,20 +64,28 @@ class ContactForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['name', 'subject', 'category', 'rating', 'message']
+        fields = ['name', 'mobile', 'upazila', 'union', 'ward', 'category', 'message']
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'আপনার পূর্ণ নাম লিখুন'
             }),
-            'subject': forms.TextInput(attrs={
+            'mobile': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'বিষয় (ঐচ্ছিক)'
+                'placeholder': '+880 123 45677'
             }),
-            'category': forms.Select(attrs={
+            'upazila': forms.Select(attrs={
+                'class': 'form-select',
+                'id': 'id_comment_upazila'
+            }),
+            'union': forms.Select(attrs={
+                'class': 'form-select',
+                'id': 'id_comment_union'
+            }),
+            'ward': forms.Select(attrs={
                 'class': 'form-select'
             }),
-            'rating': forms.Select(attrs={
+            'category': forms.Select(attrs={
                 'class': 'form-select'
             }),
             'message': forms.Textarea(attrs={
@@ -88,8 +96,24 @@ class CommentForm(forms.ModelForm):
         }
         labels = {
             'name': 'আপনার নাম',
-            'subject': 'বিষয়',
+            'mobile': 'মোবাইল নম্বর',
+            'upazila': 'উপজেলা',
+            'union': 'ইউনিয়ন/পৌরসভা',
+            'ward': 'ওয়ার্ড',
             'category': 'মতামতের ধরন',
-            'rating': 'মূল্যায়ন (ঐচ্ছিক)',
             'message': 'আপনার মতামত',
         }
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        upazila = cleaned_data.get('upazila')
+        union = cleaned_data.get('union')
+        
+        if upazila and union:
+            valid_unions = Comment.UPAZILA_UNION_MAP.get(upazila, [])
+            if union not in valid_unions:
+                raise forms.ValidationError({
+                    'union': 'নির্বাচিত ইউনিয়ন/পৌরসভা এই উপজেলার জন্য বৈধ নয়। অনুগ্রহ করে সঠিক ইউনিয়ন/পৌরসভা নির্বাচন করুন।'
+                })
+        
+        return cleaned_data

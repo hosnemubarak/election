@@ -107,8 +107,8 @@ class ContactMessage(models.Model):
     ]
     
     UPAZILA_CHOICES = [
-        ('lohagara', 'লোহাগাড়া'),
         ('satkania', 'সাতকানিয়া'),
+        ('lohagara', 'লোহাগাড়া'),
     ]
     
     UNION_CHOICES = [
@@ -127,17 +127,17 @@ class ContactMessage(models.Model):
         ('charti', '১নং চরতী'),
         ('khagria', '২নং খাগরিয়া'),
         ('nalua', '৩নং নলুয়া'),
-        ('kanchana', '৪নং কাঞ্চনা'),
+        # ('kanchana', '৪নং কাঞ্চনা'),
         ('amilais', '৫নং আমিলাইষ'),
         ('eochia', '৬নং এওচিয়া'),
         ('madarsha', '৭নং মাদার্শা'),
         ('dhemsha', '৮নং ঢেমশা'),
         ('paschim_dhemsha', '৯নং পশ্চিম ঢেমশা'),
-        ('keochia', '১০নং কেঁওচিয়া'),
-        ('kaliaish', '১১নং কালিয়াইশ'),
-        ('dharmapur', '১২নং ধর্মপুর'),
-        ('bazalia', '১৩নং বাজালিয়া'),
-        ('purangar', '১৪নং পুরানগড়'),
+        # ('keochia', '১০নং কেঁওচিয়া'),
+        # ('kaliaish', '১১নং কালিয়াইশ'),
+        # ('dharmapur', '১২নং ধর্মপুর'),
+        # ('bazalia', '১৩নং বাজালিয়া'),
+        # ('purangar', '১৪নং পুরানগড়'),
         ('chadaha', '১৫নং ছদাহা'),
         ('satkania_union', '১৬নং সাতকানিয়া'),
         ('sonakania', '১৭নং সোনাকানিয়া'),
@@ -161,17 +161,17 @@ class ContactMessage(models.Model):
                 'charti',
                 'khagria',
                 'nalua',
-                'kanchana',
+                # 'kanchana',
                 'amilais',
                 'eochia',
                 'madarsha',
                 'dhemsha',
                 'paschim_dhemsha',
-                'keochia',
-                'kaliaish',
-                'dharmapur',
-                'bazalia',
-                'purangar',
+                # 'keochia',
+                # 'kaliaish',
+                # 'dharmapur',
+                # 'bazalia',
+                # 'purangar',
                 'chadaha',
                 'satkania_union',
                 'sonakania',
@@ -179,9 +179,10 @@ class ContactMessage(models.Model):
             ]
         }
     
-    name = models.CharField(max_length=200, verbose_name='নাম')
-    email = models.EmailField(verbose_name='ইমেইল')
-    phone = models.CharField(max_length=20, verbose_name='ফোন নম্বর')
+    
+    name = models.CharField(max_length=200, verbose_name='নাম', blank=True)
+    email = models.EmailField(verbose_name='ইমেইল', blank=True)
+    phone = models.CharField(max_length=20, verbose_name='ফোন নম্বর', blank=True)
     upazila = models.CharField(max_length=50, choices=UPAZILA_CHOICES, verbose_name='উপজেলা')
     union = models.CharField(max_length=50, choices=UNION_CHOICES, verbose_name='ইউনিয়ন/পৌরসভা')
     department = models.CharField(max_length=50, choices=DEPARTMENT_CHOICES, verbose_name='বিভাগ')
@@ -217,18 +218,98 @@ class Comment(models.Model):
         ('appreciation', 'প্রশংসা'),
     ]
     
-    RATING_CHOICES = [
-        (5, 'অসাধারণ'),
-        (4, 'ভালো'),
-        (3, 'মাঝারি'),
-        (2, 'উন্নতি প্রয়োজন'),
-        (1, 'খারাপ'),
+    UPAZILA_CHOICES = [
+        ('satkania', 'সাতকানিয়া'),
+        ('lohagara', 'লোহাগাড়া'),
     ]
     
+    UNION_CHOICES = [
+        # -------- Lohagara --------
+        ('lohagara_union', 'লোহাগাড়া ইউনিয়ন'),
+        ('padua', 'পদুয়া'),
+        ('barahatia', 'বড়হাতিয়া'),
+        ('amirabad', 'আমিরাবাদ'),
+        ('adhunagar', 'আধুনগর'),
+        ('chunati', 'চুনতি'),
+        ('charamba', 'চরম্বা'),
+        ('putibila', 'পুটিবিলা'),
+        ('kalauzan', 'কলাউজান'),
+
+        # -------- Satkania (All Unions) --------
+        ('charti', '১নং চরতী'),
+        ('khagria', '২নং খাগরিয়া'),
+        ('nalua', '৩নং নলুয়া'),
+        # ('kanchana', '৪নং কাঞ্চনা'),
+        ('amilais', '৫নং আমিলাইষ'),
+        ('eochia', '৬নং এওচিয়া'),
+        ('madarsha', '৭নং মাদার্শা'),
+        ('dhemsha', '৮নং ঢেমশা'),
+        ('paschim_dhemsha', '৯নং পশ্চিম ঢেমশা'),
+        # ('keochia', '১০নং কেঁওচিয়া'),
+        # ('kaliaish', '১১নং কালিয়াইশ'),
+        # ('dharmapur', '১২নং ধর্মপুর'),
+        # ('bazalia', '১৩নং বাজালিয়া'),
+        # ('purangar', '১৪নং পুরানগড়'),
+        ('chadaha', '১৫নং ছদাহা'),
+        ('satkania_union', '১৬নং সাতকানিয়া'),
+        ('sonakania', '১৭নং সোনাকানিয়া'),
+        # -------- Satkania Pourashava --------
+        ('satkania_pourashava', 'সাতকানিয়া পৌরসভা'),
+        ]
+
+    UPAZILA_UNION_MAP = {
+        'lohagara': [
+            'lohagara_union',
+            'padua',
+            'barahatia',
+            'amirabad',
+            'adhunagar',
+            'chunati',
+            'charamba',
+            'putibila',
+            'kalauzan',
+        ],
+        'satkania': [
+                'charti',
+                'khagria',
+                'nalua',
+                # 'kanchana',
+                'amilais',
+                'eochia',
+                'madarsha',
+                'dhemsha',
+                'paschim_dhemsha',
+                # 'keochia',
+                # 'kaliaish',
+                # 'dharmapur',
+                # 'bazalia',
+                # 'purangar',
+                'chadaha',
+                'satkania_union',
+                'sonakania',
+                'satkania_pourashava',
+            ]
+        }
+    
+    WARD_CHOICES = [
+        ('1', '১'),
+        ('2', '২'),
+        ('3', '৩'),
+        ('4', '৪'),
+        ('5', '৫'),
+        ('6', '৬'),
+        ('7', '৭'),
+        ('8', '৮'),
+        ('9', '৯'),
+    ]
+    
+    
     name = models.CharField(max_length=200, verbose_name='নাম')
-    subject = models.CharField(max_length=200, verbose_name='বিষয়', blank=True)
+    mobile = models.CharField(max_length=20, verbose_name='মোবাইল নম্বর', blank=True, default='')
+    upazila = models.CharField(max_length=50, choices=UPAZILA_CHOICES, verbose_name='উপজেলা', default='satkania')
+    union = models.CharField(max_length=50, choices=UNION_CHOICES, verbose_name='ইউনিয়ন/পৌরসভা', default='satkania_union')
+    ward = models.CharField(max_length=10, choices=WARD_CHOICES, verbose_name='ওয়ার্ড', default='1')
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, verbose_name='ধরন')
-    rating = models.IntegerField(choices=RATING_CHOICES, verbose_name='মূল্যায়ন', null=True, blank=True)
     message = models.TextField(verbose_name='মতামত')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='প্রেরণের সময়')
     is_read = models.BooleanField(default=False, verbose_name='পড়া হয়েছে')
@@ -240,4 +321,13 @@ class Comment(models.Model):
         ordering = ['-created_at']
     
     def __str__(self):
-        return f"{self.name} - {self.subject or 'No Subject'} ({self.created_at.strftime('%d %b %Y')})"
+        return f"{self.name} - {self.upazila} - {self.union} ({self.created_at.strftime('%d %b %Y')})"
+    
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        if self.upazila and self.union:
+            valid_unions = self.UPAZILA_UNION_MAP.get(self.upazila, [])
+            if self.union not in valid_unions:
+                raise ValidationError({
+                    'union': f'নির্বাচিত ইউনিয়ন/পৌরসভা এই উপজেলার জন্য বৈধ নয়।'
+                })

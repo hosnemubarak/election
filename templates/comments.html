@@ -37,7 +37,7 @@
             </span>
         </div>
         <h1 class="display-4 mb-4">আপনার মতামত জানান</h1>
-        <p class="lead mx-auto" style="max-width: 700px;">আপনার মূল্যবান মতামত আমাদের কাছে অত্যন্ত গুরুত্বপূর্ণ।<br>আপনার পরামর্শ, প্রশংসা বা অভিযোগ — সবকিছুই আমরা মনোযোগ সহকারে শুনতে চাই।</p>
+        <p class="lead mx-auto" style="max-width: 700px;">চট্টগ্রাম-১৫ (সাতকানিয়া–লোহাগাড়া) আসনে বিএনপির মনোনীত ধানের শীষের প্রার্থী নাজমুল মোস্তফা আমিনের কাছে আপনার মতামত জানান।</p>
         <div class="mt-4">
             <a href="#feedback-form" class="btn btn-secondary">
                 <i class="fas fa-arrow-down me-2"></i>মতামত ফর্মে যান
@@ -82,10 +82,10 @@
                         </div>
 
                         <div class="mb-3">
-                            {{ form.email.label_tag }}
-                            {{ form.email }}
-                            {% if form.email.errors %}
-                            <div class="text-danger small">{{ form.email.errors }}</div>
+                            {{ form.mobile.label_tag }}
+                            {{ form.mobile }}
+                            {% if form.mobile.errors %}
+                            <div class="text-danger small">{{ form.mobile.errors }}</div>
                             {% endif %}
                         </div>
 
@@ -106,10 +106,10 @@
                         </div>
 
                         <div class="mb-3">
-                            {{ form.subject.label_tag }}
-                            {{ form.subject }}
-                            {% if form.subject.errors %}
-                            <div class="text-danger small">{{ form.subject.errors }}</div>
+                            {{ form.ward.label_tag }}
+                            {{ form.ward }}
+                            {% if form.ward.errors %}
+                            <div class="text-danger small">{{ form.ward.errors }}</div>
                             {% endif %}
                         </div>
 
@@ -119,15 +119,6 @@
                             {% if form.category.errors %}
                             <div class="text-danger small">{{ form.category.errors }}</div>
                             {% endif %}
-                        </div>
-
-                        <div class="mb-3">
-                            {{ form.rating.label_tag }}
-                            {{ form.rating }}
-                            {% if form.rating.errors %}
-                            <div class="text-danger small">{{ form.rating.errors }}</div>
-                            {% endif %}
-                            <small class="text-muted d-block mt-1">আমাদের কাজের মূল্যায়ন করুন (ঐচ্ছিক)</small>
                         </div>
 
                         <div class="mb-3">
@@ -186,12 +177,89 @@
 
 {% block extra_js %}
 <script>
+// Upazila-Union dependency mapping
+const upazilaUnionMap = {
+    'lohagara': [
+        {value: 'lohagara_union', text: 'লোহাগাড়া ইউনিয়ন'},
+        {value: 'padua', text: 'পদুয়া'},
+        {value: 'barahatia', text: 'বড়হাতিয়া'},
+        {value: 'amirabad', text: 'আমিরাবাদ'},
+        {value: 'adhunagar', text: 'আধুনগর'},
+        {value: 'chunati', text: 'চুনতি'},
+        {value: 'charamba', text: 'চরম্বা'},
+        {value: 'putibila', text: 'পুটিবিলা'},
+        {value: 'kalauzan', text: 'কলাউজান'}
+    ],
+    'satkania': [
+        {value: 'charti', text: '১নং চরতী'},
+        {value: 'khagria', text: '২নং খাগরিয়া'},
+        {value: 'nalua', text: '৩নং নলুয়া'},
+        // {value: 'kanchana', text: '৪নং কাঞ্চনা'},
+        {value: 'amilais', text: '৫নং আমিলাইষ'},
+        {value: 'eochia', text: '৬নং এওচিয়া'},
+        {value: 'madarsha', text: '৭নং মাদার্শা'},
+        {value: 'dhemsha', text: '৮নং ঢেমশা'},
+        {value: 'paschim_dhemsha', text: '৯নং পশ্চিম ঢেমশা'},
+        // {value: 'keochia', text: '১০নং কেঁওচিয়া'},
+        // {value: 'kaliaish', text: '১১নং কালিয়াইশ'},
+        // {value: 'dharmapur', text: '১২নং ধর্মপুর'},
+        // {value: 'bazalia', text: '১৩নং বাজালিয়া'},
+        // {value: 'purangar', text: '১৪নং পুরানগড়'},
+        {value: 'chadaha', text: '১৫নং ছদাহা'},
+        {value: 'satkania_union', text: '১৬নং সাতকানিয়া'},
+        {value: 'sonakania', text: '১৭নং সোনাকানিয়া'},
+        {value: 'satkania_pourashava', text: 'সাতকানিয়া পৌরসভা'}
+    ]
+};
+
 document.addEventListener('DOMContentLoaded', function() {
     // Check if we're not already on the feedback form section
     if (!window.location.hash) {
         // Redirect to feedback form section
         window.location.hash = '#feedback-form';
     }
+    
+    const upazilaSelect = document.getElementById('id_comment_upazila');
+    const unionSelect = document.getElementById('id_comment_union');
+    
+    if (!upazilaSelect || !unionSelect) return;
+    
+    function updateUnionOptions() {
+        const selectedUpazila = upazilaSelect.value;
+        const currentUnion = unionSelect.value;
+        
+        // Clear existing options
+        unionSelect.innerHTML = '<option value="">---------</option>';
+        
+        if (selectedUpazila && upazilaUnionMap[selectedUpazila]) {
+            const unions = upazilaUnionMap[selectedUpazila];
+            
+            unions.forEach(function(union) {
+                const option = document.createElement('option');
+                option.value = union.value;
+                option.textContent = union.text;
+                
+                // Preserve selection if valid
+                if (union.value === currentUnion) {
+                    option.selected = true;
+                }
+                
+                unionSelect.appendChild(option);
+            });
+            
+            unionSelect.disabled = false;
+        } else {
+            unionSelect.disabled = true;
+        }
+    }
+    
+    // Initialize on page load
+    updateUnionOptions();
+    
+    // Update when upazila changes
+    upazilaSelect.addEventListener('change', function() {
+        updateUnionOptions();
+    });
 });
 </script>
 {% endblock %}
