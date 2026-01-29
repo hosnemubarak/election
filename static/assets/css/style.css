@@ -270,3 +270,41 @@ a.link-secondary:hover {
   align-items: center;
 }
 
+/* Compact Spacing Utilities */
+.section-header {
+  margin-bottom: 2rem;
+}
+
+.section-header h2 {
+  margin-bottom: 0.5rem;
+}
+
+.section-header p {
+  margin-bottom: 0;
+}
+
+/* Reduce py-5 sections for compactness */
+section.py-5 {
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
+}
+
+/* Compact margin utilities */
+.mb-compact {
+  margin-bottom: 1.5rem !important;
+}
+
+.mt-compact {
+  margin-top: 1.5rem !important;
+}
+
+/* Section title spacing */
+.display-4 {
+  margin-bottom: 1rem;
+}
+
+/* Reduce card internal padding for compactness */
+.card-body {
+  padding: 1.25rem;
+}
+
